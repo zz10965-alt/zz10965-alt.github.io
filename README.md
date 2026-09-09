@@ -27,4 +27,4 @@ Fully bilingual (**English / 中文**) with a one-click toggle in the top-right 
 ## Contact
 
 - GitHub — [github.com/zz10965-alt](https://github.com/zz10965-alt)
-- Email — zzz0429x@163.com
+- Email — freyazhang968@gmail.com / zzz0429x@163.com
