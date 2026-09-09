@@ -40,9 +40,9 @@ window.PORTFOLIO = {
     location: { en: 'New York, NY · Open to China & US roles', zh: '美国纽约 · 面向中美双市场机会' },
     intro:    { en: 'MS in Management and Analytics @ NYU (GPA 3.92/4.0). I turn messy data into clear decisions — through analysis, modeling, engineering, and visualization.',
                  zh: '纽约大学管理与分析硕士（GPA 3.92/4.0）。用分析、建模、工程与可视化，把复杂数据变成清晰决策。' },
-    email:    { en: 'freyazhang968@gmail.com', zh: 'zzz0429x@163.com' },
+    email:    { en: 'zzz0429x@163.com', zh: 'zzz0429x@163.com' },
     github:   'https://github.com/zz10965-alt',
-    linkedin: 'https://www.linkedin.com/in/freya-data'
+    linkedin: ''
   },
 
   /* ---------- 关于 / About ---------- */
@@ -804,8 +804,8 @@ window.PORTFOLIO = {
   contact: {
     title: { en: 'Let\'s connect', zh: '联系我' },
     subtitle: { en: 'Open to DA / BA / DS / DE / AI-analytics roles in China and the US.', zh: '开放中美两地 DA / BA / DS / DE / AI 分析方向的机会。' },
-    email: { en: 'freyazhang968@gmail.com', zh: 'zzz0429x@163.com' },
-    phone: { en: '+1 9294567517', zh: '13896598567' },
-    linkedin: 'https://www.linkedin.com/in/freya-data'
+    email: { en: 'zzz0429x@163.com', zh: 'zzz0429x@163.com' },
+    phone: { en: '13896598567', zh: '13896598567' },
+    linkedin: ''
   }
 };

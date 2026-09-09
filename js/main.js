@@ -313,7 +313,8 @@ function renderContact() {
   document.getElementById('contact-email').href = 'mailto:' + t(C.email);
   document.getElementById('contact-email-text').textContent = t(C.email);
   document.getElementById('contact-phone').textContent = t(C.phone);
-  document.getElementById('contact-linkedin').href = C.linkedin || '#';
+  const contactLi = document.getElementById('contact-linkedin');
+  if (C.linkedin) { contactLi.href = C.linkedin; contactLi.style.display = ''; } else { contactLi.style.display = 'none'; }
 }
 
 /* ============================== 弹窗 Modal ============================== */
