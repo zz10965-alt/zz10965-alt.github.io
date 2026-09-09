@@ -43,6 +43,7 @@ function renderAll() {
   renderStats();
   renderAbout();
   renderExperience();
+  renderDashboard();
   renderProjects();
   renderEngineering();
   renderResearch();
@@ -67,6 +68,8 @@ const I18N = {
   'skills':             { en: 'Skills', zh: '技能' },
   'experience':         { en: 'Experience', zh: '实习经历' },
   'experience-sub':     { en: 'Click for full details', zh: '点击查看详情' },
+  'dashboard':          { en: 'Data Dashboard', zh: '数据看板' },
+  'dashboard-sub':      { en: 'A Tableau-style operations dashboard from my data-development internship (illustrative sample data).', zh: '数据开发实习期间搭建的 Tableau 风格运营看板（示意数据）。' },
   'projects':           { en: 'Projects', zh: '项目' },
   'projects-sub':       { en: 'Filter by capability direction', zh: '按能力方向筛选' },
   'engineering':        { en: 'Engineering', zh: '工程' },
@@ -168,6 +171,45 @@ function renderExperience() {
         <div class="tl-tech">${e.tech.map(x => `<span class="chip">${x}</span>`).join('')}</div>
       </div>
     </div>`).join('');
+}
+
+/* ============================== ③½ 数据看板 Dashboard ============================== */
+function renderDashboard() {
+  const el = document.getElementById('tableau');
+  if (!el || !PORTFOLIO.dashboard) return;
+  const D = PORTFOLIO.dashboard;
+  el.innerHTML = `
+    <div class="tb-toolbar">
+      <div class="tb-brand"><span class="tb-logo">▦</span><span class="tb-app">${t(D.app)}</span></div>
+      <div class="tb-tabs">${D.tabs.map((tb, i) => `<span class="tb-tab ${i === 0 ? 'active' : ''}">${t(tb)}</span>`).join('')}</div>
+      <div class="tb-tools">${['↶', '↷', '＋', '▤', '↗'].map(s => `<span class="tb-ico" aria-hidden="true">${s}</span>`).join('')}</div>
+    </div>
+    <div class="tb-body">
+      <aside class="tb-data">
+        <div class="tb-pane-title">${window.LANG === 'zh' ? '数据' : 'Data'}</div>
+        <div class="tb-group-label">${t(D.dimLabel)}</div>
+        ${D.dimensions.map(d => `<div class="tb-pill dim"><span class="pill-ico">Abc</span><span>${t(d)}</span></div>`).join('')}
+        <div class="tb-group-label">${t(D.measLabel)}</div>
+        ${D.measures.map(m => `<div class="tb-pill meas"><span class="pill-ico">#</span><span>${t(m)}</span></div>`).join('')}
+      </aside>
+      <main class="tb-main">
+        <div class="tb-filters">${D.filters.map(f => `<div class="tb-filter"><span class="tf-name">${t(f.name)}</span><span class="tf-value">${t(f.value)} <i>▾</i></span></div>`).join('')}</div>
+        <div class="tb-kpis">${D.kpis.map(k => `
+          <div class="tb-kpi">
+            <div class="tb-kpi-label">${t(k.label)}</div>
+            <div class="tb-kpi-value">${k.value}</div>
+            <div class="tb-kpi-delta ${k.up ? 'up' : 'down'}">${k.up ? '▲' : '▼'} ${t(k.delta)}</div>
+          </div>`).join('')}</div>
+        <div class="tb-sheets">
+          ${D.sheets.map(s => `
+            <div class="tb-sheet tb-${s.id}">
+              <div class="tb-sheet-head"><span class="tb-sheet-ico"></span><span class="tb-sheet-title">${t(s.title)}</span><span class="tb-sheet-menu">⋮</span></div>
+              <div class="tb-sheet-body"><canvas id="${s.id}"></canvas></div>
+              <div class="tb-sheet-note">${t(s.note)}</div>
+            </div>`).join('')}
+        </div>
+      </main>
+    </div>`;
 }
 
 /* ============================== ④ Projects ============================== */

@@ -158,4 +158,73 @@ window.renderCharts = function () {
     });
     document.getElementById('viz-ai-note').textContent = L === 'zh' ? 'AI 相关裁员占比整体从 11–14% 升至 38%（2026 初）' : 'Overall AI-related layoff share rose from 11–14% to 38% (early 2026)';
   }
+
+  /* ---------- Tableau 看板 ① 周活跃用户（折线） ---------- */
+  const dauEl = document.getElementById('dash-dau');
+  if (dauEl) {
+    if (window._dashDau) window._dashDau.destroy();
+    const wk = Array.from({ length: 12 }, (_, i) => (L === 'zh' ? '第' : 'W') + (i + 1));
+    window._dashDau = new Chart(dauEl, {
+      type: 'line',
+      data: {
+        labels: wk,
+        datasets: [
+          { label: L === 'zh' ? '活跃用户' : 'Active users', data: [2100, 2280, 2450, 2390, 2620, 2780, 2900, 2840, 3050, 3120, 3200, 3256], borderColor: '#2F6B9E', backgroundColor: 'rgba(47,107,158,0.13)', fill: true, tension: 0.35, pointRadius: 2.5, pointBackgroundColor: '#2F6B9E', borderWidth: 2 },
+          { label: L === 'zh' ? '新增注册' : 'New registrations', data: [420, 510, 480, 560, 610, 590, 680, 640, 720, 760, 790, 810], borderColor: '#3C9D6E', backgroundColor: 'rgba(60,157,110,0.08)', fill: true, tension: 0.35, pointRadius: 2.5, pointBackgroundColor: '#3C9D6E', borderWidth: 2 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        scales: { y: { beginAtZero: true, grid: { color: 'rgba(120,120,120,0.10)' }, ticks: { font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } },
+        plugins: { legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 6, font: { size: 11 } } } }
+      }
+    });
+  }
+
+  /* ---------- Tableau 看板 ② 用户角色分布（环形） ---------- */
+  const rolesEl = document.getElementById('dash-roles');
+  if (rolesEl) {
+    if (window._dashRoles) window._dashRoles.destroy();
+    window._dashRoles = new Chart(rolesEl, {
+      type: 'doughnut',
+      data: {
+        labels: [L === 'zh' ? '学生' : 'Students', L === 'zh' ? '教师' : 'Teachers', L === 'zh' ? '管理员' : 'Admins'],
+        datasets: [{ data: [14244, 3374, 1124], backgroundColor: ['#2F6B9E', '#3C9D6E', '#C08A3E'], borderColor: '#fff', borderWidth: 2, hoverOffset: 8 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, cutout: '56%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 7, padding: 10, font: { size: 11 } } } } }
+    });
+  }
+
+  /* ---------- Tableau 看板 ③ 每周答题量（分组柱状） ---------- */
+  const wdEl = document.getElementById('dash-weekday');
+  if (wdEl) {
+    if (window._dashWd) window._dashWd.destroy();
+    const days = L === 'zh' ? ['周一', '周二', '周三', '周四', '周五', '周六', '周日'] : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    window._dashWd = new Chart(wdEl, {
+      type: 'bar',
+      data: {
+        labels: days,
+        datasets: [
+          { label: L === 'zh' ? '学生' : 'Students', data: [1240, 1380, 1420, 1350, 1180, 890, 760], backgroundColor: '#2F6B9E', borderRadius: 4 },
+          { label: L === 'zh' ? '教师' : 'Teachers', data: [210, 235, 260, 245, 205, 120, 95], backgroundColor: '#8FB3D0', borderRadius: 4 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { color: 'rgba(120,120,120,0.10)' }, ticks: { font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }, plugins: { legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 6, font: { size: 11 } } } } }
+    });
+  }
+
+  /* ---------- Tableau 看板 ④ 热门课程（横向柱状） ---------- */
+  const coursesEl = document.getElementById('dash-courses');
+  if (coursesEl) {
+    if (window._dashCourses) window._dashCourses.destroy();
+    const cnames = L === 'zh'
+      ? ['Python 数据分析基础', 'SQL 实战', '机器学习入门', 'Tableau 可视化', '统计学基础']
+      : ['Python for Data Analysis', 'SQL in Practice', 'Intro to Machine Learning', 'Tableau Visualization', 'Statistics Fundamentals'];
+    window._dashCourses = new Chart(coursesEl, {
+      type: 'bar',
+      data: { labels: cnames, datasets: [{ data: [2840, 2310, 1980, 1650, 1420], backgroundColor: ['#2F6B9E', '#3C9D6E', '#C08A3E', '#9F1239', '#8FB3D0'], borderRadius: 5, maxBarThickness: 34 }] },
+      options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, scales: { x: { beginAtZero: true, grid: { color: 'rgba(120,120,120,0.10)' }, ticks: { font: { size: 10 } } }, y: { grid: { display: false }, ticks: { font: { size: 10.5 } } } }, plugins: { legend: { display: false } } }
+    });
+  }
 };

@@ -295,6 +295,72 @@ img { max-width: 100%; display: block; }
 .viz-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow-sm); }
 .viz-card .chart-canvas-wrap { height: 260px; }
 
+/* ============================== Tableau 风格看板 ============================== */
+.tableau {
+  background: #EFEFED; border: 1px solid #D9D9D7; border-radius: 10px; overflow: hidden;
+  box-shadow: var(--shadow-lg); font-size: 13px; text-align: left; color: #333;
+}
+.tb-toolbar { display: flex; align-items: center; gap: 16px; padding: 8px 14px; background: #fff; border-bottom: 1px solid #E2E2E0; }
+.tb-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #2F6B9E; white-space: nowrap; }
+.tb-logo { width: 22px; height: 22px; border-radius: 4px; display: grid; place-items: center; background: linear-gradient(135deg, #2F6B9E, #3C9D6E); color: #fff; font-size: 12px; font-weight: 800; }
+.tb-app { font-size: 13px; }
+.tb-tabs { display: flex; gap: 3px; overflow-x: auto; }
+.tb-tab { padding: 5px 13px; font-size: 12.5px; color: #666; cursor: pointer; border-radius: 4px 4px 0 0; border: 1px solid transparent; white-space: nowrap; }
+.tb-tab.active { background: #EFEFED; border-color: #D9D9D7; color: #2F6B9E; font-weight: 600; }
+.tb-tools { margin-left: auto; display: flex; gap: 4px; }
+.tb-ico { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 4px; color: #666; font-size: 14px; cursor: pointer; }
+.tb-ico:hover { background: #F0F0EE; }
+
+.tb-body { display: grid; grid-template-columns: 188px 1fr; min-height: 560px; }
+.tb-data { background: #fff; border-right: 1px solid #E2E2E0; padding: 12px; }
+.tb-pane-title { font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+.tb-group-label { font-size: 10.5px; font-weight: 700; color: #A0A09E; text-transform: uppercase; letter-spacing: .05em; margin: 12px 0 6px; }
+.tb-pill { display: flex; align-items: center; gap: 7px; padding: 5px 8px; border-radius: 4px; margin-bottom: 3px; font-size: 12px; cursor: default; }
+.tb-pill.dim { background: #E8F0F8; color: #1F5C8A; }
+.tb-pill.meas { background: #E7F4EC; color: #2E7D52; }
+.pill-ico { font-size: 9.5px; font-weight: 700; opacity: .55; min-width: 18px; }
+
+.tb-main { padding: 12px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.tb-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.tb-filter { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #D9D9D7; border-radius: 4px; padding: 5px 10px; font-size: 12px; }
+.tf-name { color: #888; }
+.tf-value { color: #2F6B9E; font-weight: 600; }
+.tf-value i { font-style: normal; font-size: 9px; color: #888; }
+
+.tb-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.tb-kpi { background: #fff; border: 1px solid #E2E2E0; border-radius: 6px; padding: 13px 15px; }
+.tb-kpi-label { font-size: 11px; color: #888; }
+.tb-kpi-value { font-size: 23px; font-weight: 800; font-family: var(--mono); color: #333; margin: 3px 0 1px; letter-spacing: -0.01em; }
+.tb-kpi-delta { font-size: 11px; font-weight: 600; }
+.tb-kpi-delta.up { color: #2E7D52; }
+.tb-kpi-delta.down { color: #C0392B; }
+
+.tb-sheets { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tb-sheet { background: #fff; border: 1px solid #E2E2E0; border-radius: 6px; display: flex; flex-direction: column; overflow: hidden; }
+.tb-sheet.tb-dash-dau { grid-column: 1 / -1; }
+.tb-sheet.tb-dash-courses { grid-column: 1 / -1; }
+.tb-sheet-head { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid #F0F0EE; }
+.tb-sheet-ico { width: 10px; height: 10px; border-radius: 2px; background: #2F6B9E; flex-shrink: 0; }
+.tb-sheet-title { font-size: 12.5px; font-weight: 600; color: #333; }
+.tb-sheet-menu { margin-left: auto; color: #BBB; cursor: pointer; font-size: 15px; }
+.tb-sheet-body { position: relative; height: 230px; padding: 6px 12px 6px; }
+.tb-sheet.tb-dash-dau .tb-sheet-body { height: 250px; }
+.tb-sheet.tb-dash-courses .tb-sheet-body { height: 220px; }
+.tb-sheet-note { font-size: 10.5px; color: #999; padding: 0 12px 10px; }
+
+@media (max-width: 900px) {
+  .tb-body { grid-template-columns: 1fr; }
+  .tb-data { display: none; }
+  .tb-kpis { grid-template-columns: repeat(2, 1fr); }
+  .tb-sheets { grid-template-columns: 1fr; }
+  .tb-sheet.tb-dash-dau, .tb-sheet.tb-dash-courses { grid-column: 1; }
+  .tb-tabs { max-width: 46vw; }
+}
+@media (max-width: 640px) {
+  .tb-kpis { grid-template-columns: 1fr 1fr; }
+  .tb-tools { display: none; }
+}
+
 /* ============================== Engineering ============================== */
 .eng-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
 .eng-card {

@@ -25,6 +25,7 @@ window.PORTFOLIO = {
     { id: 'home',        en: 'Home',        zh: '首页' },
     { id: 'about',       en: 'About',       zh: '关于' },
     { id: 'experience',  en: 'Experience',  zh: '实习经历' },
+    { id: 'dashboard',   en: 'Dashboard',   zh: '数据看板' },
     { id: 'projects',    en: 'Projects',    zh: '项目' },
     { id: 'engineering', en: 'Engineering', zh: '工程' },
     { id: 'research',    en: 'Research',    zh: '科研' },
@@ -192,6 +193,47 @@ window.PORTFOLIO = {
       ]
     }
   ],
+
+  /* ---------- 数据看板 Dashboard（数据开发实习 · Tableau 风格看板，示意数据）---------- */
+  dashboard: {
+    app: { en: 'AI Solution · Learning Platform Ops', zh: 'AI Solution · 教学平台运营' },
+    tabs: [
+      { en: 'Dashboard 1', zh: '仪表板 1' },
+      { en: 'Users', zh: '用户' },
+      { en: 'Courses', zh: '课程' },
+      { en: 'Q&A', zh: '问答' }
+    ],
+    dimLabel: { en: 'Dimensions', zh: '维度' },
+    measLabel: { en: 'Measures', zh: '度量' },
+    dimensions: [
+      { en: 'User Type', zh: '用户类型' },
+      { en: 'Course', zh: '课程' },
+      { en: 'Date', zh: '日期' },
+      { en: 'Region', zh: '地区' }
+    ],
+    measures: [
+      { en: 'Registrations', zh: '注册数' },
+      { en: 'Daily Active', zh: '日活跃' },
+      { en: 'Study Hours', zh: '学习时长' },
+      { en: 'Completion %', zh: '完成率' }
+    ],
+    filters: [
+      { name: { en: 'Date range', zh: '时间范围' }, value: { en: 'Last 12 weeks', zh: '近 12 周' } },
+      { name: { en: 'User role', zh: '用户角色' }, value: { en: 'All', zh: '全部' } }
+    ],
+    kpis: [
+      { label: { en: 'Total users', zh: '总注册用户' }, value: '18,742', delta: { en: '+12.4% MoM', zh: '环比 +12.4%' }, up: true },
+      { label: { en: 'Daily active users', zh: '日活跃用户' }, value: '3,256', delta: { en: '+8.1% MoM', zh: '环比 +8.1%' }, up: true },
+      { label: { en: 'Monthly study hours', zh: '本月学习时长' }, value: '41,920', delta: { en: '+5.6% MoM', zh: '环比 +5.6%' }, up: true },
+      { label: { en: 'Completion rate', zh: '课程完成率' }, value: '68.3%', delta: { en: '+2.1 pp', zh: '+2.1 pp' }, up: true }
+    ],
+    sheets: [
+      { id: 'dash-dau', title: { en: 'Weekly Active Users — Last 12 Weeks', zh: '周活跃用户 —— 近 12 周' }, note: { en: 'Active users & new registrations by week (steady ~50% quarterly growth).', zh: '按周统计的活跃用户与新注册（季度内稳定增长约 50%）。' } },
+      { id: 'dash-roles', title: { en: 'User Role Mix', zh: '用户角色分布' }, note: { en: 'Registered users by role (students / teachers / admins).', zh: '注册用户按角色占比（学生 / 教师 / 管理员）。' } },
+      { id: 'dash-weekday', title: { en: 'Q&A Volume by Weekday', zh: '每周答题量（按星期）' }, note: { en: 'Average weekly answer volume — students vs. teachers.', zh: '学生 vs 教师周均答题量。' } },
+      { id: 'dash-courses', title: { en: 'Top Courses by Enrollment', zh: '热门课程（按报名人数）' }, note: { en: 'Top 5 courses by cumulative enrollment.', zh: '累计报名人数前 5 的课程。' } }
+    ]
+  },
 
   /* ---------- 项目 Projects（14 个，可多标签筛选）----------
    *  image: 留空 = 显示占位图；填 "文件名.png" 即可显示你的截图 */
