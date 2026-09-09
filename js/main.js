@@ -16,7 +16,7 @@ function t(o) {
 /* ---------- 小工具：按分类取颜色 ---------- */
 const CAT_COLOR = {};
 CATEGORIES.forEach(c => { CAT_COLOR[c.id] = c.color; });
-function catColor(id) { return CAT_COLOR[id] || '#1E4E79'; }
+function catColor(id) { return CAT_COLOR[id] || '#2563EB'; }
 function catName(id) { const c = CATEGORIES.find(x => x.id === id); return c ? t(c) : id; }
 
 /* ---------- 小图标（装饰用） ---------- */
@@ -43,7 +43,6 @@ function renderAll() {
   renderStats();
   renderAbout();
   renderExperience();
-  renderDashboard();
   renderProjects();
   renderEngineering();
   renderResearch();
@@ -68,8 +67,6 @@ const I18N = {
   'skills':             { en: 'Skills', zh: '技能' },
   'experience':         { en: 'Experience', zh: '实习经历' },
   'experience-sub':     { en: 'Click for full details', zh: '点击查看详情' },
-  'dashboard':          { en: 'Data Dashboard', zh: '数据看板' },
-  'dashboard-sub':      { en: 'A Tableau-style operations dashboard from my data-development internship (illustrative sample data).', zh: '数据开发实习期间搭建的 Tableau 风格运营看板（示意数据）。' },
   'projects':           { en: 'Projects', zh: '项目' },
   'projects-sub':       { en: 'Filter by capability direction', zh: '按能力方向筛选' },
   'engineering':        { en: 'Engineering', zh: '工程' },
@@ -108,15 +105,25 @@ function renderHero() {
     { v: '2.5×',    l: { en: 'payment gap found', zh: '支付差距' }, icon: '📈' },
     { v: 'RAG',     l: { en: 'AI agent built', zh: 'AI 智能体' }, icon: '🤖' }
   ];
-  document.getElementById('hero-decor').innerHTML = badges.map((b, i) => `
-    <div class="float-badge fb-${i + 1}"><span class="fb-ico">${b.icon}</span><span class="fb-v">${b.v}</span><span class="fb-l">${t(b.l)}</span></div>`).join('');
+  const stickers = [
+    { icon: '📊', cls: 'st-1', rot: '-12deg' },
+    { icon: '📈', cls: 'st-2', rot: '10deg' },
+    { icon: '🧮', cls: 'st-3', rot: '8deg' },
+    { icon: '🗄️', cls: 'st-4', rot: '-8deg' },
+    { icon: '🤖', cls: 'st-5', rot: '-6deg' },
+    { icon: '🔍', cls: 'st-6', rot: '12deg' }
+  ];
+  document.getElementById('hero-decor').innerHTML =
+    badges.map((b, i) => `
+    <div class="float-badge fb-${i + 1}"><span class="fb-ico">${b.icon}</span><span class="fb-v">${b.v}</span><span class="fb-l">${t(b.l)}</span></div>`).join('') +
+    stickers.map(s => `<span class="sticker ${s.cls}" style="--rot:${s.rot}">${s.icon}</span>`).join('');
 }
 
 function renderStats() {
   const stats = [
     { value: 3.92, decimals: 2, suffix: '', label: { en: 'GPA / 4.0 (NYU)', zh: 'GPA / 4.0（NYU）' } },
     { value: 7, decimals: 0, suffix: '', label: { en: 'Published papers', zh: '已发表论文' } },
-    { value: 14, decimals: 0, suffix: '', label: { en: 'Analytics projects', zh: '分析项目' } },
+    { value: 17, decimals: 0, suffix: '', label: { en: 'Projects & dashboards', zh: '项目与看板' } },
     { value: 4, decimals: 0, suffix: '', label: { en: 'Internships', zh: '实习经历' } },
     { value: 28, decimals: 0, suffix: '', label: { en: 'Awards & honors', zh: '奖项荣誉' } }
   ];
@@ -173,43 +180,36 @@ function renderExperience() {
     </div>`).join('');
 }
 
-/* ============================== ③½ 数据看板 Dashboard ============================== */
-function renderDashboard() {
-  const el = document.getElementById('tableau');
-  if (!el || !PORTFOLIO.dashboard) return;
-  const D = PORTFOLIO.dashboard;
-  el.innerHTML = `
-    <div class="tb-toolbar">
-      <div class="tb-brand"><span class="tb-logo">▦</span><span class="tb-app">${t(D.app)}</span></div>
-      <div class="tb-tabs">${D.tabs.map((tb, i) => `<span class="tb-tab ${i === 0 ? 'active' : ''}">${t(tb)}</span>`).join('')}</div>
-      <div class="tb-tools">${['↶', '↷', '＋', '▤', '↗'].map(s => `<span class="tb-ico" aria-hidden="true">${s}</span>`).join('')}</div>
-    </div>
-    <div class="tb-body">
-      <aside class="tb-data">
-        <div class="tb-pane-title">${window.LANG === 'zh' ? '数据' : 'Data'}</div>
-        <div class="tb-group-label">${t(D.dimLabel)}</div>
-        ${D.dimensions.map(d => `<div class="tb-pill dim"><span class="pill-ico">Abc</span><span>${t(d)}</span></div>`).join('')}
-        <div class="tb-group-label">${t(D.measLabel)}</div>
-        ${D.measures.map(m => `<div class="tb-pill meas"><span class="pill-ico">#</span><span>${t(m)}</span></div>`).join('')}
-      </aside>
-      <main class="tb-main">
-        <div class="tb-filters">${D.filters.map(f => `<div class="tb-filter"><span class="tf-name">${t(f.name)}</span><span class="tf-value">${t(f.value)} <i>▾</i></span></div>`).join('')}</div>
-        <div class="tb-kpis">${D.kpis.map(k => `
-          <div class="tb-kpi">
-            <div class="tb-kpi-label">${t(k.label)}</div>
-            <div class="tb-kpi-value">${k.value}</div>
-            <div class="tb-kpi-delta ${k.up ? 'up' : 'down'}">${k.up ? '▲' : '▼'} ${t(k.delta)}</div>
-          </div>`).join('')}</div>
-        <div class="tb-sheets">
-          ${D.sheets.map(s => `
-            <div class="tb-sheet tb-${s.id}">
-              <div class="tb-sheet-head"><span class="tb-sheet-ico"></span><span class="tb-sheet-title">${t(s.title)}</span><span class="tb-sheet-menu">⋮</span></div>
-              <div class="tb-sheet-body"><canvas id="${s.id}"></canvas></div>
-              <div class="tb-sheet-note">${t(s.note)}</div>
-            </div>`).join('')}
+/* ============================== ④ Projects（含数据看板）============================== */
+function renderDashboardProject(p) {
+  const theme = p.theme || catColor(p.categories[0]);
+  const sheets = (p.charts || []).map(c => `
+    <div class="tb-sheet ${c.span === 'full' ? 'tb-sheet-full' : ''}">
+      <div class="tb-sheet-head"><span class="tb-sheet-ico" style="background:${theme}"></span><span class="tb-sheet-title">${t(c.title)}</span></div>
+      <div class="tb-sheet-body"><canvas id="${c.id}"></canvas></div>
+      <div class="tb-sheet-note">${t(c.note)}</div>
+    </div>`).join('');
+  return `
+    <article class="proj-card dash-proj" style="--accent:${theme}">
+      <div class="dash-head">
+        <div>
+          <h4>${t(p.title)}</h4>
+          <div class="proj-role">${t(p.role)}</div>
         </div>
-      </main>
-    </div>`;
+        <div class="dash-head-meta">
+          <div class="proj-tags">${p.categories.map(c => `<span class="tag" style="color:${catColor(c)};border-color:${catColor(c)}">${catName(c)}</span>`).join('')}</div>
+          <div class="proj-tech">${p.tech.map(x => `<span class="chip">${x}</span>`).join('')}</div>
+        </div>
+      </div>
+      <p class="dash-summary">${t(p.summary)}</p>
+      <div class="tb-kpis">${p.kpis.map(k => `
+        <div class="tb-kpi">
+          <div class="tb-kpi-label">${t(k.label)}</div>
+          <div class="tb-kpi-value" style="color:${theme}">${k.value}</div>
+          <div class="tb-kpi-delta ${k.up ? 'up' : 'down'}">${k.up ? '▲' : '▼'} ${t(k.delta)}</div>
+        </div>`).join('')}</div>
+      <div class="tb-sheets">${sheets}</div>
+    </article>`;
 }
 
 /* ============================== ④ Projects ============================== */
@@ -225,6 +225,7 @@ function renderProjects() {
   const list = PORTFOLIO.projects.filter(p => ACTIVE_FILTER === 'all' || p.categories.includes(ACTIVE_FILTER));
   document.getElementById('project-grid').innerHTML = list.map((p, idx) => {
     const realIdx = PORTFOLIO.projects.indexOf(p);
+    if (p.type === 'dashboard') return renderDashboardProject(p);
     const mainCat = p.categories[0];
     return `
     <article class="proj-card" style="--accent:${catColor(mainCat)}" data-modal="proj-${realIdx}">
@@ -424,6 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!btn) return;
     ACTIVE_FILTER = btn.dataset.filter;
     renderProjects();
+    if (window.renderCharts) window.renderCharts();
   });
 
   // 弹窗（事件委托）

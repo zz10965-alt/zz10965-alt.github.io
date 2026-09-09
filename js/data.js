@@ -11,10 +11,10 @@
 
 /* 4 个能力方向（筛选标签 + 项目分类 + 图表配色都用它们） */
 const CATEGORIES = [
-  { id: 'analysis',    en: 'Data Analysis & Business Insight', zh: '数据分析与商业洞察', color: '#1E4E79' },
-  { id: 'engineering', en: 'Data Engineering & Development',  zh: '数据工程与数据开发',   color: '#0E7490' },
-  { id: 'ml',          en: 'ML & Statistical Modeling',       zh: '机器学习与统计建模',   color: '#B45309' },
-  { id: 'viz',         en: 'Data Products & Visualization',   zh: '数据产品与可视化',     color: '#9F1239' }
+  { id: 'analysis',    en: 'Data Analysis & Business Insight', zh: '数据分析与商业洞察', color: '#2563EB' },
+  { id: 'engineering', en: 'Data Engineering & Development',  zh: '数据工程与数据开发',   color: '#0D9488' },
+  { id: 'ml',          en: 'ML & Statistical Modeling',       zh: '机器学习与统计建模',   color: '#F59E0B' },
+  { id: 'viz',         en: 'Data Products & Visualization',   zh: '数据产品与可视化',     color: '#EC4899' }
 ];
 
 /* ============================== 全站内容 ============================== */
@@ -25,7 +25,6 @@ window.PORTFOLIO = {
     { id: 'home',        en: 'Home',        zh: '首页' },
     { id: 'about',       en: 'About',       zh: '关于' },
     { id: 'experience',  en: 'Experience',  zh: '实习经历' },
-    { id: 'dashboard',   en: 'Dashboard',   zh: '数据看板' },
     { id: 'projects',    en: 'Projects',    zh: '项目' },
     { id: 'engineering', en: 'Engineering', zh: '工程' },
     { id: 'research',    en: 'Research',    zh: '科研' },
@@ -194,48 +193,8 @@ window.PORTFOLIO = {
     }
   ],
 
-  /* ---------- 数据看板 Dashboard（数据开发实习 · Tableau 风格看板，示意数据）---------- */
-  dashboard: {
-    app: { en: 'AI Solution · Learning Platform Ops', zh: 'AI Solution · 教学平台运营' },
-    tabs: [
-      { en: 'Dashboard 1', zh: '仪表板 1' },
-      { en: 'Users', zh: '用户' },
-      { en: 'Courses', zh: '课程' },
-      { en: 'Q&A', zh: '问答' }
-    ],
-    dimLabel: { en: 'Dimensions', zh: '维度' },
-    measLabel: { en: 'Measures', zh: '度量' },
-    dimensions: [
-      { en: 'User Type', zh: '用户类型' },
-      { en: 'Course', zh: '课程' },
-      { en: 'Date', zh: '日期' },
-      { en: 'Region', zh: '地区' }
-    ],
-    measures: [
-      { en: 'Registrations', zh: '注册数' },
-      { en: 'Daily Active', zh: '日活跃' },
-      { en: 'Study Hours', zh: '学习时长' },
-      { en: 'Completion %', zh: '完成率' }
-    ],
-    filters: [
-      { name: { en: 'Date range', zh: '时间范围' }, value: { en: 'Last 12 weeks', zh: '近 12 周' } },
-      { name: { en: 'User role', zh: '用户角色' }, value: { en: 'All', zh: '全部' } }
-    ],
-    kpis: [
-      { label: { en: 'Total users', zh: '总注册用户' }, value: '18,742', delta: { en: '+12.4% MoM', zh: '环比 +12.4%' }, up: true },
-      { label: { en: 'Daily active users', zh: '日活跃用户' }, value: '3,256', delta: { en: '+8.1% MoM', zh: '环比 +8.1%' }, up: true },
-      { label: { en: 'Monthly study hours', zh: '本月学习时长' }, value: '41,920', delta: { en: '+5.6% MoM', zh: '环比 +5.6%' }, up: true },
-      { label: { en: 'Completion rate', zh: '课程完成率' }, value: '68.3%', delta: { en: '+2.1 pp', zh: '+2.1 pp' }, up: true }
-    ],
-    sheets: [
-      { id: 'dash-dau', title: { en: 'Weekly Active Users — Last 12 Weeks', zh: '周活跃用户 —— 近 12 周' }, note: { en: 'Active users & new registrations by week (steady ~50% quarterly growth).', zh: '按周统计的活跃用户与新注册（季度内稳定增长约 50%）。' } },
-      { id: 'dash-roles', title: { en: 'User Role Mix', zh: '用户角色分布' }, note: { en: 'Registered users by role (students / teachers / admins).', zh: '注册用户按角色占比（学生 / 教师 / 管理员）。' } },
-      { id: 'dash-weekday', title: { en: 'Q&A Volume by Weekday', zh: '每周答题量（按星期）' }, note: { en: 'Average weekly answer volume — students vs. teachers.', zh: '学生 vs 教师周均答题量。' } },
-      { id: 'dash-courses', title: { en: 'Top Courses by Enrollment', zh: '热门课程（按报名人数）' }, note: { en: 'Top 5 courses by cumulative enrollment.', zh: '累计报名人数前 5 的课程。' } }
-    ]
-  },
-
-  /* ---------- 项目 Projects（14 个，可多标签筛选）----------
+  /* ---------- 项目 Projects（14 个分析项目 + 3 个数据看板，可多标签筛选）----------
+   *  type: 'dashboard' 的条目 = 数据看板项目（挂在「数据产品与可视化」分类下），全宽展示。
    *  image: 留空 = 显示占位图；填 "文件名.png" 即可显示你的截图 */
   projects: [
     {
@@ -522,6 +481,110 @@ window.PORTFOLIO = {
       tech: ['Questionnaire', 'Interview', 'SPSS'],
       metrics: [
         { value: { en: '~18M', zh: '1800万' }, label: { en: 'target population', zh: '目标群体' } }
+      ]
+    },
+    {
+      slug: 'db-platform', type: 'dashboard', theme: '#0D9488',
+      title: { en: 'Learning Platform Ops Dashboard', zh: '教学平台运营看板' },
+      categories: ['viz'], period: { en: '2026', zh: '2026' },
+      role: { en: 'Data Development Intern · AI Solution', zh: '数据开发实习生 · AI Solution' },
+      summary: { en: 'Tableau-style ops dashboard monitoring registrations, daily active users, study hours and course performance for an ed-tech platform (illustrative sample data).',
+                 zh: 'Tableau 风格运营看板，监控教学平台的注册、日活、学习时长与课程表现（示意数据）。' },
+      tech: ['Tableau', 'SQL Server', 'Chart.js'],
+      metrics: [
+        { value: '18,742', label: { en: 'total users', zh: '总用户' } },
+        { value: '68.3%', label: { en: 'completion rate', zh: '完成率' } }
+      ],
+      kpis: [
+        { label: { en: 'Total users', zh: '总注册用户' }, value: '18,742', delta: { en: '+12.4% MoM', zh: '环比 +12.4%' }, up: true },
+        { label: { en: 'Daily active users', zh: '日活跃用户' }, value: '3,256', delta: { en: '+8.1% MoM', zh: '环比 +8.1%' }, up: true },
+        { label: { en: 'Monthly study hours', zh: '本月学习时长' }, value: '41,920', delta: { en: '+5.6% MoM', zh: '环比 +5.6%' }, up: true },
+        { label: { en: 'Completion rate', zh: '课程完成率' }, value: '68.3%', delta: { en: '+2.1 pp', zh: '+2.1 pp' }, up: true }
+      ],
+      charts: [
+        { id: 'db1-c1', span: 'full', type: 'line', title: { en: 'Weekly Active Users — Last 12 Weeks', zh: '周活跃用户 —— 近 12 周' }, note: { en: 'Active users & new registrations by week.', zh: '按周统计的活跃用户与新注册。' },
+          labels: { en: ['W1','W2','W3','W4','W5','W6','W7','W8','W9','W10','W11','W12'], zh: ['第1周','第2周','第3周','第4周','第5周','第6周','第7周','第8周','第9周','第10周','第11周','第12周'] },
+          series: [
+            { label: { en: 'Active users', zh: '活跃用户' }, data: [2100,2280,2450,2390,2620,2780,2900,2840,3050,3120,3200,3256], color: '#0D9488', fill: true },
+            { label: { en: 'New registrations', zh: '新增注册' }, data: [420,510,480,560,610,590,680,640,720,760,790,810], color: '#F59E0B', fill: true }
+          ] },
+        { id: 'db1-c2', span: 'half', type: 'doughnut', title: { en: 'User Role Mix', zh: '用户角色分布' }, note: { en: 'Registered users by role.', zh: '注册用户按角色占比。' },
+          labels: { en: ['Students','Teachers','Admins'], zh: ['学生','教师','管理员'] },
+          series: [ { data: [14244,3374,1124], colors: ['#0D9488','#2563EB','#EAB308'] } ] },
+        { id: 'db1-c3', span: 'half', type: 'hbar', title: { en: 'Top Courses by Enrollment', zh: '热门课程（按报名人数）' }, note: { en: 'Top 5 courses by cumulative enrollment.', zh: '累计报名人数前 5 的课程。' },
+          labels: { en: ['Python for Data Analysis','SQL in Practice','Intro to Machine Learning','Tableau Visualization','Statistics Fundamentals'], zh: ['Python 数据分析基础','SQL 实战','机器学习入门','Tableau 可视化','统计学基础'] },
+          series: [ { data: [2840,2310,1980,1650,1420], colors: ['#0D9488','#2563EB','#EAB308','#EC4899','#0EA5E9'] } ] }
+      ]
+    },
+    {
+      slug: 'db-ads', type: 'dashboard', theme: '#F59E0B',
+      title: { en: 'Ad Campaign Analytics Dashboard', zh: '广告投放分析看板' },
+      categories: ['viz'], period: { en: '2026', zh: '2026' },
+      role: { en: 'Data Analyst Intern · Google LCS', zh: '数据分析实习生 · 谷歌 LCS' },
+      summary: { en: 'Ad-campaign KPI dashboard tracking CTR, CVR, CPA and channel spend for large app clients (illustrative sample data).',
+                 zh: '面向大型 App 客户的广告投放 KPI 看板，追踪 CTR、CVR、CPA 与渠道花费（示意数据）。' },
+      tech: ['Tableau', 'SQL', 'Python (Pandas)'],
+      metrics: [
+        { value: '2.4%', label: { en: 'CTR', zh: '点击率' } },
+        { value: '$14.2', label: { en: 'avg CPA', zh: '平均获客成本' } }
+      ],
+      kpis: [
+        { label: { en: 'Total ad spend', zh: '广告总花费' }, value: '$128,400', delta: { en: '+6.2% WoW', zh: '周环比 +6.2%' }, up: true },
+        { label: { en: 'CTR', zh: '点击率' }, value: '2.4%', delta: { en: '+0.3 pp', zh: '+0.3 pp' }, up: true },
+        { label: { en: 'CVR', zh: '转化率' }, value: '5.8%', delta: { en: '+0.4 pp', zh: '+0.4 pp' }, up: true },
+        { label: { en: 'Avg CPA', zh: '平均获客成本' }, value: '$14.20', delta: { en: '-8.5%', zh: '-8.5%' }, up: true }
+      ],
+      charts: [
+        { id: 'db2-c1', span: 'full', type: 'line', title: { en: 'Weekly CTR & CVR', zh: '周点击率与转化率' }, note: { en: 'Click-through and conversion rate, 8 weeks.', zh: '近 8 周点击率与转化率走势。' },
+          labels: { en: ['W1','W2','W3','W4','W5','W6','W7','W8'], zh: ['第1周','第2周','第3周','第4周','第5周','第6周','第7周','第8周'] },
+          series: [
+            { label: { en: 'CTR %', zh: '点击率' }, data: [2.1,2.2,2.0,2.3,2.2,2.4,2.3,2.4], color: '#F59E0B', fill: false },
+            { label: { en: 'CVR %', zh: '转化率' }, data: [5.2,5.4,5.3,5.6,5.5,5.7,5.6,5.8], color: '#2563EB', fill: false }
+          ] },
+        { id: 'db2-c2', span: 'half', type: 'doughnut', title: { en: 'Spend by Channel', zh: '渠道花费占比' }, note: { en: 'Share of total ad spend.', zh: '广告花费按渠道占比。' },
+          labels: { en: ['Search','Display','Video','Social','In-app'], zh: ['搜索','展示','视频','社交','应用内'] },
+          series: [ { data: [42,26,18,9,5], colors: ['#F59E0B','#2563EB','#EC4899','#0D9488','#0EA5E9'] } ] },
+        { id: 'db2-c3', span: 'half', type: 'hbar', title: { en: 'CPA by Channel', zh: '各渠道获客成本（CPA）' }, note: { en: 'Cost per acquisition, lower is better.', zh: '每获客成本，越低越好。' },
+          labels: { en: ['Search','In-app','Video','Social','Display'], zh: ['搜索','应用内','视频','社交','展示'] },
+          series: [ { data: [12.4,13.1,15.6,16.9,18.2], colors: ['#0D9488','#0EA5E9','#F59E0B','#EC4899','#2563EB'] } ] }
+      ]
+    },
+    {
+      slug: 'db-market', type: 'dashboard', theme: '#EC4899',
+      title: { en: 'Smartphone Market Research Dashboard', zh: '手机市场研究看板' },
+      categories: ['viz'], period: { en: '2025', zh: '2025' },
+      role: { en: 'Business Analyst Intern · NielsenIQ GfK', zh: '商业分析实习生 · 尼尔森 IQ GfK' },
+      summary: { en: 'Consumer & brand insight dashboard from 2,600+ surveys across Saudi Arabia, Egypt and India (illustrative sample data).',
+                 zh: '基于沙特、埃及、印度 2600+ 份问卷的消费者与品牌洞察看板（示意数据）。' },
+      tech: ['Excel', 'SPSS', 'Python'],
+      metrics: [
+        { value: '2,600+', label: { en: 'surveys', zh: '问卷' } },
+        { value: '3', label: { en: 'markets', zh: '市场' } }
+      ],
+      kpis: [
+        { label: { en: 'Surveys cleaned', zh: '清洗问卷' }, value: '2,600+', delta: { en: '1040 + 1641', zh: '1040 + 1641' }, up: true },
+        { label: { en: 'Markets', zh: '覆盖市场' }, value: '3', delta: { en: 'Saudi · Egypt · India', zh: '沙特·埃及·印度' }, up: true },
+        { label: { en: 'Top brand share', zh: 'Top 品牌份额' }, value: '34%', delta: { en: 'Brand A', zh: '品牌 A' }, up: true },
+        { label: { en: 'Citing price', zh: '首选价格因素' }, value: '68%', delta: { en: 'top driver', zh: '首要驱动' }, up: true }
+      ],
+      charts: [
+        { id: 'db3-c1', span: 'full', type: 'hbar', title: { en: 'Brand Preference Share', zh: '品牌偏好份额' }, note: { en: 'Top 5 brands by stated preference.', zh: '消费者偏好前 5 品牌份额。' },
+          labels: { en: ['Brand A','Brand B','Brand C','Brand D','Brand E'], zh: ['品牌 A','品牌 B','品牌 C','品牌 D','品牌 E'] },
+          series: [ { data: [34,26,18,12,10], colors: ['#EC4899','#2563EB','#F59E0B','#0D9488','#0EA5E9'] } ] },
+        { id: 'db3-c2', span: 'half', type: 'radar', title: { en: 'Purchase Drivers by Market', zh: '购买驱动因素（分市场）' }, note: { en: 'Importance score 1–5 by market.', zh: '各市场购买因素重要度（1–5 分）。' },
+          labels: { en: ['Price','Brand','Performance','Battery','Camera','Design'], zh: ['价格','品牌','性能','续航','相机','外观'] },
+          series: [
+            { label: { en: 'Saudi', zh: '沙特' }, data: [4.6,3.8,4.2,4.0,3.9,3.5], color: '#EC4899' },
+            { label: { en: 'Egypt', zh: '埃及' }, data: [4.8,3.5,3.9,4.1,3.6,3.3], color: '#2563EB' },
+            { label: { en: 'India', zh: '印度' }, data: [4.4,4.0,4.4,3.8,4.1,3.7], color: '#F59E0B' }
+          ] },
+        { id: 'db3-c3', span: 'half', type: 'grouped', title: { en: 'Purchase Intent by Market', zh: '购买意向（分市场）' }, note: { en: 'Share of respondents by intent.', zh: '受访者购买意向占比。' },
+          labels: { en: ['Saudi','Egypt','India'], zh: ['沙特','埃及','印度'] },
+          series: [
+            { label: { en: 'Intend', zh: '考虑购买' }, data: [38,44,52], color: '#EC4899' },
+            { label: { en: 'Maybe', zh: '可能购买' }, data: [45,40,35], color: '#2563EB' },
+            { label: { en: 'Not', zh: '不考虑' }, data: [17,16,13], color: '#CBD5E1' }
+          ] }
       ]
     }
   ],

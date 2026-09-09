@@ -3,6 +3,70 @@
  *  依赖 js/vendor/chart.umd.min.js；若 CDN/本地都未加载则优雅降级。
  * ========================================================================= */
 
+/* 十六进制色 → rgba（带透明度），用于图表填充/雷达底色 */
+function dashAlpha(hex, a) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
+  if (!m) return 'rgba(120,120,120,' + a + ')';
+  const n = parseInt(m[1], 16);
+  return 'rgba(' + ((n >> 16) & 255) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+}
+
+/* 数据看板图表配置（按 data.js 中 dashboard 项目的 charts 定义，支持 line/doughnut/hbar/grouped/radar） */
+function buildDashConfig(cfg, L) {
+  const labels = cfg.labels ? (L === 'zh' ? cfg.labels.zh : cfg.labels.en) : [];
+  const legendBottom = { position: 'bottom', labels: { usePointStyle: true, boxWidth: 7, padding: 10, font: { size: 11 } } };
+  const legendTop = { position: 'top', labels: { usePointStyle: true, boxWidth: 6, font: { size: 11 } } };
+  switch (cfg.type) {
+    case 'line':
+      return {
+        type: 'line',
+        data: { labels, datasets: cfg.series.map(s => ({
+          label: t(s.label), data: s.data,
+          borderColor: s.color, backgroundColor: dashAlpha(s.color, 0.13),
+          fill: !!s.fill, tension: 0.35, pointRadius: 2.5, pointBackgroundColor: s.color, borderWidth: 2
+        })) },
+        options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+          scales: { y: { beginAtZero: true, grid: { color: 'rgba(120,120,120,0.10)' }, ticks: { font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } },
+          plugins: { legend: legendTop } }
+      };
+    case 'doughnut':
+      return {
+        type: 'doughnut',
+        data: { labels, datasets: [{ data: cfg.series[0].data, backgroundColor: cfg.series[0].colors, borderColor: '#fff', borderWidth: 2, hoverOffset: 8 }] },
+        options: { responsive: true, maintainAspectRatio: false, cutout: '56%', plugins: { legend: legendBottom } }
+      };
+    case 'hbar':
+      return {
+        type: 'bar',
+        data: { labels, datasets: [{ data: cfg.series[0].data, backgroundColor: cfg.series[0].colors, borderRadius: 5, maxBarThickness: 30 }] },
+        options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+          scales: { x: { beginAtZero: true, grid: { color: 'rgba(120,120,120,0.10)' }, ticks: { font: { size: 10 } } }, y: { grid: { display: false }, ticks: { font: { size: 10.5 } } } },
+          plugins: { legend: { display: false } } }
+      };
+    case 'grouped':
+      return {
+        type: 'bar',
+        data: { labels, datasets: cfg.series.map(s => ({ label: t(s.label), data: s.data, backgroundColor: s.color, borderRadius: 5 })) },
+        options: { responsive: true, maintainAspectRatio: false,
+          scales: { y: { beginAtZero: true, grid: { color: 'rgba(120,120,120,0.10)' }, ticks: { font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } },
+          plugins: { legend: legendBottom } }
+      };
+    case 'radar':
+      return {
+        type: 'radar',
+        data: { labels, datasets: cfg.series.map(s => ({
+          label: t(s.label), data: s.data, borderColor: s.color,
+          backgroundColor: dashAlpha(s.color, 0.14), borderWidth: 2, pointBackgroundColor: s.color, pointRadius: 2.5
+        })) },
+        options: { responsive: true, maintainAspectRatio: false,
+          scales: { r: { beginAtZero: true, min: 0, max: 5, ticks: { stepSize: 1, display: false, backdropColor: 'transparent' }, grid: { color: 'rgba(100,116,139,0.18)' }, angleLines: { color: 'rgba(100,116,139,0.18)' }, pointLabels: { color: '#334155', font: { size: 11 } } } },
+          plugins: { legend: legendBottom } }
+      };
+    default:
+      return { type: 'bar', data: { labels, datasets: [] }, options: { responsive: true, maintainAspectRatio: false } };
+  }
+}
+
 window.renderCharts = function () {
   if (typeof Chart === 'undefined') return;
 
@@ -92,7 +156,7 @@ window.renderCharts = function () {
         plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 14, font: { size: 11 } } } }
       }
     });
-    document.getElementById('viz-categories-note').textContent = L === 'zh' ? '14 个项目按能力方向的分布（项目可多标签）' : '14 projects across 4 capability directions (multi-tagged)';
+    document.getElementById('viz-categories-note').textContent = L === 'zh' ? (PORTFOLIO.projects.length + ' 个项目按能力方向的分布（项目可多标签）') : (PORTFOLIO.projects.length + ' projects across 4 capability directions (multi-tagged)');
   }
 
   /* ---------- 数据亮点 ② 论文与专著按年份（柱状） ---------- */
@@ -159,72 +223,14 @@ window.renderCharts = function () {
     document.getElementById('viz-ai-note').textContent = L === 'zh' ? 'AI 相关裁员占比整体从 11–14% 升至 38%（2026 初）' : 'Overall AI-related layoff share rose from 11–14% to 38% (early 2026)';
   }
 
-  /* ---------- Tableau 看板 ① 周活跃用户（折线） ---------- */
-  const dauEl = document.getElementById('dash-dau');
-  if (dauEl) {
-    if (window._dashDau) window._dashDau.destroy();
-    const wk = Array.from({ length: 12 }, (_, i) => (L === 'zh' ? '第' : 'W') + (i + 1));
-    window._dashDau = new Chart(dauEl, {
-      type: 'line',
-      data: {
-        labels: wk,
-        datasets: [
-          { label: L === 'zh' ? '活跃用户' : 'Active users', data: [2100, 2280, 2450, 2390, 2620, 2780, 2900, 2840, 3050, 3120, 3200, 3256], borderColor: '#2F6B9E', backgroundColor: 'rgba(47,107,158,0.13)', fill: true, tension: 0.35, pointRadius: 2.5, pointBackgroundColor: '#2F6B9E', borderWidth: 2 },
-          { label: L === 'zh' ? '新增注册' : 'New registrations', data: [420, 510, 480, 560, 610, 590, 680, 640, 720, 760, 790, 810], borderColor: '#3C9D6E', backgroundColor: 'rgba(60,157,110,0.08)', fill: true, tension: 0.35, pointRadius: 2.5, pointBackgroundColor: '#3C9D6E', borderWidth: 2 }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        scales: { y: { beginAtZero: true, grid: { color: 'rgba(120,120,120,0.10)' }, ticks: { font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } },
-        plugins: { legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 6, font: { size: 11 } } } }
-      }
+  /* ---------- 数据看板图表（遍历所有 dashboard 项目的 charts，按类型自动渲染） ---------- */
+  PORTFOLIO.projects.filter(p => p.type === 'dashboard').forEach(p => {
+    (p.charts || []).forEach(cfg => {
+      const el = document.getElementById(cfg.id);
+      if (!el) return;
+      const key = '_dash_' + cfg.id;
+      if (window[key]) window[key].destroy();
+      window[key] = new Chart(el, buildDashConfig(cfg, L));
     });
-  }
-
-  /* ---------- Tableau 看板 ② 用户角色分布（环形） ---------- */
-  const rolesEl = document.getElementById('dash-roles');
-  if (rolesEl) {
-    if (window._dashRoles) window._dashRoles.destroy();
-    window._dashRoles = new Chart(rolesEl, {
-      type: 'doughnut',
-      data: {
-        labels: [L === 'zh' ? '学生' : 'Students', L === 'zh' ? '教师' : 'Teachers', L === 'zh' ? '管理员' : 'Admins'],
-        datasets: [{ data: [14244, 3374, 1124], backgroundColor: ['#2F6B9E', '#3C9D6E', '#C08A3E'], borderColor: '#fff', borderWidth: 2, hoverOffset: 8 }]
-      },
-      options: { responsive: true, maintainAspectRatio: false, cutout: '56%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 7, padding: 10, font: { size: 11 } } } } }
-    });
-  }
-
-  /* ---------- Tableau 看板 ③ 每周答题量（分组柱状） ---------- */
-  const wdEl = document.getElementById('dash-weekday');
-  if (wdEl) {
-    if (window._dashWd) window._dashWd.destroy();
-    const days = L === 'zh' ? ['周一', '周二', '周三', '周四', '周五', '周六', '周日'] : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    window._dashWd = new Chart(wdEl, {
-      type: 'bar',
-      data: {
-        labels: days,
-        datasets: [
-          { label: L === 'zh' ? '学生' : 'Students', data: [1240, 1380, 1420, 1350, 1180, 890, 760], backgroundColor: '#2F6B9E', borderRadius: 4 },
-          { label: L === 'zh' ? '教师' : 'Teachers', data: [210, 235, 260, 245, 205, 120, 95], backgroundColor: '#8FB3D0', borderRadius: 4 }
-        ]
-      },
-      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { color: 'rgba(120,120,120,0.10)' }, ticks: { font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }, plugins: { legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 6, font: { size: 11 } } } } }
-    });
-  }
-
-  /* ---------- Tableau 看板 ④ 热门课程（横向柱状） ---------- */
-  const coursesEl = document.getElementById('dash-courses');
-  if (coursesEl) {
-    if (window._dashCourses) window._dashCourses.destroy();
-    const cnames = L === 'zh'
-      ? ['Python 数据分析基础', 'SQL 实战', '机器学习入门', 'Tableau 可视化', '统计学基础']
-      : ['Python for Data Analysis', 'SQL in Practice', 'Intro to Machine Learning', 'Tableau Visualization', 'Statistics Fundamentals'];
-    window._dashCourses = new Chart(coursesEl, {
-      type: 'bar',
-      data: { labels: cnames, datasets: [{ data: [2840, 2310, 1980, 1650, 1420], backgroundColor: ['#2F6B9E', '#3C9D6E', '#C08A3E', '#9F1239', '#8FB3D0'], borderRadius: 5, maxBarThickness: 34 }] },
-      options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, scales: { x: { beginAtZero: true, grid: { color: 'rgba(120,120,120,0.10)' }, ticks: { font: { size: 10 } } }, y: { grid: { display: false }, ticks: { font: { size: 10.5 } } } }, plugins: { legend: { display: false } } }
-    });
-  }
+  });
 };
