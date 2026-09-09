@@ -42,7 +42,7 @@ window.PORTFOLIO = {
                  zh: '纽约大学管理与分析硕士（GPA 3.92/4.0）。用分析、建模、工程与可视化，把复杂数据变成清晰决策。' },
     email:    { en: 'freyazhang968@gmail.com', zh: 'zzz0429x@163.com' },
     github:   'https://github.com/zz10965-alt',
-    linkedin: '' /* ← 填你的 LinkedIn 链接，例如 https://www.linkedin.com/in/xxx  */
+    linkedin: 'https://www.linkedin.com/in/freya-data'
   },
 
   /* ---------- 关于 / About ---------- */
@@ -95,11 +95,48 @@ window.PORTFOLIO = {
 
   /* ---------- 技能分组（文本列表）---------- */
   skillGroups: [
-    { name: { en: 'Programming', zh: '编程语言' }, items: ['Python (Pandas / NumPy)', 'SQL', 'R', 'Java', 'C# (.NET 8)'] },
-    { name: { en: 'Data & Analysis', zh: '数据分析' }, items: ['Data Cleaning', 'Descriptive Statistics', 'Hypothesis Testing (t / χ² / Kruskal-Wallis)', 'Regression', 'Pearson Correlation', 'Clustering (K-Means)', 'Coefficient of Variation', 'IQR Outlier Detection', 'A/B Testing (methodology)', 'User Segmentation'] },
-    { name: { en: 'Database & Engineering', zh: '数据库与工程' }, items: ['MySQL', 'SQL Server', 'Relational Modeling', 'Stored Procedures', 'ETL Basics', 'Spark', 'Spring Boot', 'Git'] },
-    { name: { en: 'Visualization & BI', zh: '可视化与 BI' }, items: ['Tableau', 'Power BI', 'Excel (Pivot / Functions)', 'SPSS'] },
-    { name: { en: 'Machine Learning', zh: '机器学习' }, items: ['Decision Tree', 'Random Forest', 'Logistic Regression', 'Spark ML', 'Weka'] }
+    { name: { en: 'Programming', zh: '编程语言' }, items: [
+      { en: 'Python (Pandas / NumPy)', zh: 'Python (Pandas / NumPy)' },
+      { en: 'SQL', zh: 'SQL' },
+      { en: 'R', zh: 'R' },
+      { en: 'Java', zh: 'Java' },
+      { en: 'C# (.NET 8)', zh: 'C# (.NET 8)' }
+    ] },
+    { name: { en: 'Data & Analysis', zh: '数据分析' }, items: [
+      { en: 'Data Cleaning', zh: '数据清洗' },
+      { en: 'Descriptive Statistics', zh: '描述性统计' },
+      { en: 'Hypothesis Testing (t / χ² / Kruskal-Wallis)', zh: '假设检验（t / χ² / Kruskal-Wallis）' },
+      { en: 'Regression', zh: '回归分析' },
+      { en: 'Pearson Correlation', zh: '皮尔逊相关' },
+      { en: 'Clustering (K-Means)', zh: '聚类分析（K-Means）' },
+      { en: 'Coefficient of Variation', zh: '变异系数' },
+      { en: 'IQR Outlier Detection', zh: 'IQR 异常值检测' },
+      { en: 'A/B Testing (methodology)', zh: 'A/B 测试（方法论）' },
+      { en: 'User Segmentation', zh: '用户细分' }
+    ] },
+    { name: { en: 'Database & Engineering', zh: '数据库与工程' }, items: [
+      { en: 'MySQL', zh: 'MySQL' },
+      { en: 'SQL Server', zh: 'SQL Server' },
+      { en: 'Relational Modeling', zh: '关系型建模' },
+      { en: 'Stored Procedures', zh: '存储过程' },
+      { en: 'ETL Basics', zh: 'ETL 基础' },
+      { en: 'Spark', zh: 'Spark' },
+      { en: 'Spring Boot', zh: 'Spring Boot' },
+      { en: 'Git', zh: 'Git' }
+    ] },
+    { name: { en: 'Visualization & BI', zh: '可视化与 BI' }, items: [
+      { en: 'Tableau', zh: 'Tableau' },
+      { en: 'Power BI', zh: 'Power BI' },
+      { en: 'Excel (Pivot / Functions)', zh: 'Excel（透视表 / 函数）' },
+      { en: 'SPSS', zh: 'SPSS' }
+    ] },
+    { name: { en: 'Machine Learning', zh: '机器学习' }, items: [
+      { en: 'Decision Tree', zh: '决策树' },
+      { en: 'Random Forest', zh: '随机森林' },
+      { en: 'Logistic Regression', zh: '逻辑回归' },
+      { en: 'Spark ML', zh: 'Spark ML' },
+      { en: 'Weka', zh: 'Weka' }
+    ] }
   ],
 
   /* ---------- 实习经历 Experience（时间线 + 点击弹窗）---------- */
@@ -744,6 +781,7 @@ window.PORTFOLIO = {
     title: { en: 'Let\'s connect', zh: '联系我' },
     subtitle: { en: 'Open to DA / BA / DS / DE / AI-analytics roles in China and the US.', zh: '开放中美两地 DA / BA / DS / DE / AI 分析方向的机会。' },
     email: { en: 'freyazhang968@gmail.com', zh: 'zzz0429x@163.com' },
-    phone: { en: '+1 9294567517', zh: '13896598567' }
+    phone: { en: '+1 9294567517', zh: '13896598567' },
+    linkedin: 'https://www.linkedin.com/in/freya-data'
   }
 };

@@ -100,7 +100,7 @@ function renderHero() {
 
   // 封面左右悬浮数据卡片（装饰，真实数据）
   const badges = [
-    { v: '146,427', l: { en: 'records cleaned', zh: '清洗记录' }, icon: '🗄️' },
+    { v: '680K+', l: { en: 'records processed (all projects)', zh: '累计处理记录（全部项目）' }, icon: '🗄️' },
     { v: '3h→1h',   l: { en: 'weekly prep saved', zh: '周报表省时' }, icon: '⚡' },
     { v: '2.5×',    l: { en: 'payment gap found', zh: '支付差距' }, icon: '📈' },
     { v: 'RAG',     l: { en: 'AI agent built', zh: 'AI 智能体' }, icon: '🤖' }
@@ -160,7 +160,7 @@ function renderAbout() {
   document.getElementById('skill-groups').innerHTML = PORTFOLIO.skillGroups.map(g => `
     <div class="skill-group reveal">
       <h5>${t(g.name)}</h5>
-      <div class="chips">${g.items.map(i => `<span class="chip">${i}</span>`).join('')}</div>
+      <div class="chips">${g.items.map(i => `<span class="chip">${t(i)}</span>`).join('')}</div>
     </div>`).join('');
 }
 
@@ -321,6 +321,7 @@ function renderContact() {
   document.getElementById('contact-email').href = 'mailto:' + t(C.email);
   document.getElementById('contact-email-text').textContent = t(C.email);
   document.getElementById('contact-phone').textContent = t(C.phone);
+  document.getElementById('contact-linkedin').href = C.linkedin || '#';
 }
 
 /* ============================== 弹窗 Modal ============================== */
