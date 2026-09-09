@@ -255,7 +255,14 @@ window.PORTFOLIO = {
         { value: '2.5×',   label: { en: 'payment gap', zh: '支付差距' } },
         { value: '146,427', label: { en: 'records cleaned', zh: '清洗记录' } },
         { value: '95.3%',  label: { en: 'DRGs over threshold', zh: 'DRG 超阈值' } }
-      ]
+      ],
+      chart: {
+        id: 'proj-medicare-chart', type: 'hbar',
+        title: { en: 'Average inpatient payment — highest vs lowest state', zh: '平均住院支付 —— 最高 vs 最低州' },
+        note: { en: 'Per-stay payment, a 2.5× gap between Maryland and Vermont.', zh: '单次住院支付，马里兰与佛蒙特相差 2.5 倍。' },
+        labels: { en: ['Maryland (MD)', 'Vermont (VT)'], zh: ['马里兰（MD）', '佛蒙特（VT）'] },
+        series: [ { data: [39922, 15674], colors: ['#2563EB', '#94A3B8'] } ]
+      }
     },
     {
       slug: 'mysql-sales', title: { en: 'Customer Sales Analysis & Database Design', zh: 'MySQL 销售与客户分析' },
@@ -300,7 +307,14 @@ window.PORTFOLIO = {
         { value: '17.9%', label: { en: 'overall attrition', zh: '整体流失率' } },
         { value: '~10K',  label: { en: 'employees analyzed', zh: '员工记录' } },
         { value: 'd=0.854', label: { en: 'strongest driver (burnout)', zh: '最强驱动(burnout)' } }
-      ]
+      ],
+      chart: {
+        id: 'proj-attrition-chart', type: 'hbar',
+        title: { en: 'Attrition rate — overall vs top departments', zh: '流失率 —— 整体 vs 主要部门' },
+        note: { en: 'Customer service and sales show the highest attrition.', zh: '客服与销售部门流失率最高。' },
+        labels: { en: ['Overall', 'Customer service', 'Sales'], zh: ['整体', '客服', '销售'] },
+        series: [ { data: [17.9, 24.1, 20.0], colors: ['#2563EB', '#F59E0B', '#EF4444'] } ]
+      }
     },
     {
       slug: 'ai-layoffs', title: { en: 'Global AI & Tech Layoffs Analysis (2020–2026)', zh: '全球 AI 科技裁员分析（2020–2026）' },
@@ -320,7 +334,17 @@ window.PORTFOLIO = {
       metrics: [
         { value: '1,850', label: { en: 'layoff events', zh: '裁员事件' } },
         { value: '38%',   label: { en: 'AI share (2026)', zh: 'AI 占比(2026)' } }
-      ]
+      ],
+      chart: {
+        id: 'proj-ai-chart', type: 'grouped',
+        title: { en: 'AI-related share of layoff causes — 2020–23 vs 2026', zh: 'AI 相关裁员占比 —— 2020–23 对比 2026' },
+        note: { en: 'Share of layoff causes tied to AI automation; overall 11–14% → 38%.', zh: 'AI 自动化相关裁员占比；整体从 11–14% 升至 38%。' },
+        labels: { en: ['Overall', 'Industrial Tech (industry)', 'Germany (country)'], zh: ['总体', '工业科技（行业）', '德国（国家）'] },
+        series: [
+          { label: { en: '2020–23', zh: '2020–23' }, data: [12.5, 6.25, 11.63], color: '#94A3B8' },
+          { label: { en: '2026', zh: '2026' }, data: [38, 75, 63.33], color: '#F59E0B' }
+        ]
+      }
     },
     {
       slug: 'patent-nlp', title: { en: 'Patent Infringement Detection (NLP + ML)', zh: '专利侵权识别（NLP + 机器学习）' },

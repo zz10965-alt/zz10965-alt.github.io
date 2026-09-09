@@ -485,6 +485,10 @@ img { max-width: 100%; display: block; }
 .m-metrics { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line); }
 .m-img { margin-top: 18px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
 .diag-zoom img { background: #fff; }
+.m-chart { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line); }
+.m-chart-head { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.m-chart-canvas { position: relative; height: 240px; }
+.m-chart-note { margin-top: 6px; font-size: 0.78rem; color: var(--text-2); }
 
 /* ============================== 动效 ============================== */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1); }

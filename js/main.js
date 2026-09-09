@@ -317,11 +317,27 @@ function renderContact() {
 }
 
 /* ============================== 弹窗 Modal ============================== */
+/* 弹窗内图表：打开时按需实例化，关闭时销毁 */
+const MODAL_CHARTS = [];
+function renderModalChart(cfg) {
+  if (typeof Chart === 'undefined' || typeof buildDashConfig !== 'function') return;
+  const el = document.getElementById(cfg.id);
+  if (!el) return;
+  MODAL_CHARTS.forEach(c => { try { c.destroy(); } catch (e) {} });
+  MODAL_CHARTS.length = 0;
+  MODAL_CHARTS.push(new Chart(el, buildDashConfig(cfg, window.LANG)));
+}
+function destroyModalCharts() {
+  MODAL_CHARTS.forEach(c => { try { c.destroy(); } catch (e) {} });
+  MODAL_CHARTS.length = 0;
+}
+
 function openModal(key) {
   const [type, i] = key.split('-');
   const idx = parseInt(i, 10);
   const body = document.getElementById('modal-body');
   let html = '';
+  let modalChart = null;
 
   if (type === 'exp') {
     const e = PORTFOLIO.experience[idx];
@@ -346,7 +362,14 @@ function openModal(key) {
       <ul class="m-bullets">${p.highlights.map(h => `<li>${t(h)}</li>`).join('')}</ul>
       <div class="m-row"><span class="m-label">${window.LANG === 'zh' ? '技术栈' : 'Tech'}:</span> ${p.tech.map(x => `<span class="chip">${x}</span>`).join('')}</div>
       <div class="m-metrics">${p.metrics.map(m => `<div class="metric"><span class="m-value">${t(m.value)}</span><span class="m-label">${t(m.label)}</span></div>`).join('')}</div>
+      ${p.chart ? `
+        <div class="m-chart">
+          <div class="m-chart-head">${t(p.chart.title)}</div>
+          <div class="m-chart-canvas"><canvas id="${p.chart.id}"></canvas></div>
+          <div class="m-chart-note">${t(p.chart.note)}</div>
+        </div>` : ''}
       ${p.image ? `<div class="m-img"><img src="assets/img/projects/${p.image}" alt="${t(p.title)}"></div>` : ''}`;
+      modalChart = p.chart || null;
   } else if (type === 'eng') {
     const e = PORTFOLIO.engineering[idx];
     html = `
@@ -361,10 +384,12 @@ function openModal(key) {
   }
 
   body.innerHTML = html;
+  if (modalChart) renderModalChart(modalChart);
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeModal() {
+  destroyModalCharts();
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow = '';
 }
