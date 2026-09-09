@@ -93,7 +93,7 @@ function renderHero() {
   document.getElementById('hero-intro').textContent = t(H.intro);
   document.getElementById('hero-location-text').textContent = t(H.location);
 
-  document.getElementById('hero-email').href = 'mailto:' + H.email;
+  document.getElementById('hero-email').href = 'mailto:' + t(H.email);
   document.getElementById('hero-github').href = H.github;
   const li = document.getElementById('hero-linkedin');
   if (H.linkedin) { li.href = H.linkedin; li.style.display = ''; } else { li.style.display = 'none'; }
@@ -318,9 +318,9 @@ function renderContact() {
   const C = PORTFOLIO.contact;
   document.getElementById('contact-title').textContent = t(C.title);
   document.getElementById('contact-subtitle').textContent = t(C.subtitle);
-  document.getElementById('contact-email').href = 'mailto:' + C.email;
-  document.getElementById('contact-email-text').textContent = C.email;
-  document.getElementById('contact-phone').textContent = C.phone;
+  document.getElementById('contact-email').href = 'mailto:' + t(C.email);
+  document.getElementById('contact-email-text').textContent = t(C.email);
+  document.getElementById('contact-phone').textContent = t(C.phone);
 }
 
 /* ============================== 弹窗 Modal ============================== */
