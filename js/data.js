@@ -4,7 +4,7 @@
  *  改文字：直接改下面的 { en: "...", zh: "..." } 即可，英文在前、中文在后。
  *  加截图：把图片放进 assets/img/projects/ 文件夹，
  *          再把对应项目的 image 字段填成 "文件名.png"（例如 "medicare.png"）。
- *  改头像：替换 assets/img/profile.png 即可。
+ *  改头像：替换 assets/img/profile.jpg 即可。
  *  改配色：改本文件顶部的 CATEGORIES 里的 color 值。
  *  语言切换 / 筛选 / 弹窗 / 图表 都是自动的，不用改别的文件。
  * ========================================================================= */
@@ -105,9 +105,9 @@ window.PORTFOLIO = {
   /* ---------- 实习经历 Experience（时间线 + 点击弹窗）---------- */
   experience: [
     {
-      slug: 'google', accent: '#1E4E79', diagram: 'assets/img/diagrams/google.svg',
+      slug: 'google', accent: '#1E4E79', diagram: { en: 'assets/img/diagrams/google-en.svg', zh: 'assets/img/diagrams/google-zh.svg' },
       company:  { en: 'Google', zh: '谷歌（Google）' },
-      role:     { en: 'Data Analyst Intern — Large Customer Sales', zh: '数据分析实习生 · 大客户销售部' },
+      role:     { en: 'Data Analyst Intern — Large Customer Sales (LCS) Ad Analytics', zh: '数据分析实习生 · 大客户销售（LCS）广告分析组' },
       location: { en: 'Beijing, China', zh: '中国北京' },
       period:   '2026.07 – 2026.09',
       summary:  { en: 'Supported ad-campaign analytics for large app clients — data extraction, KPI diagnosis and report automation.',
@@ -128,9 +128,9 @@ window.PORTFOLIO = {
       ]
     },
     {
-      slug: 'ai-solution', accent: '#0E7490', diagram: 'assets/img/diagrams/ai-solution.svg',
+      slug: 'ai-solution', accent: '#0E7490', diagram: { en: 'assets/img/diagrams/ai-solution-en.svg', zh: 'assets/img/diagrams/ai-solution-zh.svg' },
       company:  { en: 'AI Solution', zh: 'AI Solution' },
-      role:     { en: 'Data Platform Development Intern — Software Dev', zh: '数据平台开发实习生 · 软件开发部' },
+      role:     { en: 'Data Development Intern', zh: '数据开发实习生' },
       location: { en: 'Covina, CA, USA', zh: '美国科维纳' },
       period:   '2026.05 – 2026.07',
       summary:  { en: 'Maintained the data layer of an education platform serving thousands of users.',
@@ -421,7 +421,7 @@ window.PORTFOLIO = {
       ],
       tech: ['Survey Research', 'Interview', 'SPSS'],
       metrics: [
-        { value: '国家级', label: { en: 'case award', zh: '案例大赛' } }
+        { value: { en: 'National', zh: '国家级' }, label: { en: 'case award', zh: '案例大赛' } }
       ]
     },
     {
@@ -459,7 +459,7 @@ window.PORTFOLIO = {
       ],
       tech: ['SPSS', 'Logistic Regression', 'Questionnaire'],
       metrics: [
-        { value: '5区14村', label: { en: 'fieldwork scope', zh: '调研范围' } },
+        { value: { en: '5 districts · 14 villages', zh: '5区14村' }, label: { en: 'fieldwork scope', zh: '调研范围' } },
         { value: '4', label: { en: 'care models compared', zh: '养老模式对比' } }
       ]
     },
@@ -479,7 +479,7 @@ window.PORTFOLIO = {
       ],
       tech: ['Questionnaire', 'Interview', 'SPSS'],
       metrics: [
-        { value: '1800万', label: { en: 'target population', zh: '目标群体' } }
+        { value: { en: '~18M', zh: '1800万' }, label: { en: 'target population', zh: '目标群体' } }
       ]
     }
   ],
@@ -490,7 +490,7 @@ window.PORTFOLIO = {
       slug: 'seckill', accent: '#1E4E79',
       title: { en: 'Seckill (Flash-Sale) System', zh: '秒杀（抢购）系统' },
       oneLiner: { en: 'High-concurrency e-commerce flash-sale system', zh: '高并发电商秒杀系统' },
-      diagram: 'assets/img/diagrams/seckill.svg',
+      diagram: { en: 'assets/img/diagrams/seckill-en.svg', zh: 'assets/img/diagrams/seckill-zh.svg' },
       repo: 'https://github.com/zz10965-alt/seckill-system',
       stack: ['Spring Boot 2.3.6', 'MySQL + MyBatis', 'Redis (Jedis) + Lua', 'RocketMQ', 'Sentinel'],
       summary: { en: 'Solves the core high-concurrency problems of flash sales: atomic inventory deduction, traffic peak-shaving, rate limiting, distributed locks and cache preheating.',
@@ -508,7 +508,7 @@ window.PORTFOLIO = {
       slug: 'paas', accent: '#0E7490',
       title: { en: 'PaaS Cloud Management Console', zh: 'PaaS 云管理控制台' },
       oneLiner: { en: 'Frontend console for a cloud-native PaaS platform', zh: '云原生 PaaS 平台管理控制台前端' },
-      diagram: 'assets/img/diagrams/paas.svg',
+      diagram: { en: 'assets/img/diagrams/paas-en.svg', zh: 'assets/img/diagrams/paas-zh.svg' },
       repo: 'https://github.com/zz10965-alt/go-paas-frontend',
       stack: ['HTML5 / CSS3 / JS', 'Bootstrap 4', 'jQuery', 'Chart.js'],
       summary: { en: 'Visual management of applications, services, domains, storage, images and users, plus a cloud-app marketplace.',
@@ -524,7 +524,7 @@ window.PORTFOLIO = {
       slug: 'ai-agent', accent: '#B45309',
       title: { en: 'AI Conversational Agent (RAG)', zh: 'AI 对话智能体（RAG）' },
       oneLiner: { en: 'Retrieval-augmented AI agent with voice & memory', zh: '带语音与记忆的检索增强 AI 智能体' },
-      diagram: 'assets/img/diagrams/ai-agent.svg',
+      diagram: { en: 'assets/img/diagrams/ai-agent-en.svg', zh: 'assets/img/diagrams/ai-agent-zh.svg' },
       repo: 'https://github.com/zz10965-alt/ai-conversational-agent',
       stack: ['FastAPI 0.104.1', 'LangChain 0.0.335', 'Qdrant 1.5.0', 'Redis', 'OpenAI 1.2.4'],
       summary: { en: 'A retrieval-augmented conversational agent that combines vector search, conversation memory and speech I/O.',
@@ -597,15 +597,6 @@ window.PORTFOLIO = {
       metric: { value: '324', label: { en: 'pages', zh: '页数' } }
     }
   ],
-  inReview: {
-    heading: { en: 'Under review / revision (6 papers)', zh: '在审 / 返修中（6 篇）' },
-    note: { en: 'Submitted and in review — not yet published.', zh: '已投稿、在审中 —— 尚未发表。' },
-    journals: [
-      { journal: 'IJIS', count: 3, status: { en: 'R1 / revision', zh: '返修' } },
-      { journal: 'TAOA', count: 2, status: { en: 'revision', zh: '返修' } },
-      { journal: 'Neurocomputing', count: 1, status: { en: 'R1', zh: '返修 R1' } }
-    ]
-  },
 
   /* ---------- 荣誉 Awards（分级）---------- */
   awards: [
@@ -622,9 +613,9 @@ window.PORTFOLIO = {
       { title: { en: '"Pioneer Cup" Extracurricular Academic Competition — Special Prize', zh: '重庆理工大学「开拓杯」· 特等奖' }, year: '' },
       { title: { en: '"Challenge Cup" — First Prize', zh: '「挑战杯」· 一等奖' }, year: '' },
       { title: { en: 'Social Survey Report Competition — First Prize', zh: '社会调查报告大赛 · 一等奖' }, year: '' },
-      { title: { en: 'Merit Student (三好学生)', zh: '三好学生' }, year: '' },
-      { title: { en: 'Outstanding Student Cadre (优秀学生干部)', zh: '优秀学生干部' }, year: '' },
-      { title: { en: 'Outstanding League Member (优秀共青团员)', zh: '优秀共青团员' }, year: '' },
+      { title: { en: 'Merit Student', zh: '三好学生' }, year: '' },
+      { title: { en: 'Outstanding Student Cadre', zh: '优秀学生干部' }, year: '' },
+      { title: { en: 'Outstanding League Member', zh: '优秀共青团员' }, year: '' },
       { title: { en: 'Second-Class Scholarship ×2', zh: '校级乙等奖学金 ×2' }, year: '2022–2024' }
     ] },
     { level: 'college', levelLabel: { en: 'College', zh: '院级' }, items: [

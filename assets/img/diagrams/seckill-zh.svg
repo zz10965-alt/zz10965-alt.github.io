@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 460" font-family="Inter,Arial,sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+  <rect width="860" height="460" rx="14" fill="#ffffff"/>
+  <text x="430" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#1E4E79">秒杀系统 —— 高并发架构</text>
+
+  <!-- 客户端 -->
+  <rect x="24" y="200" width="150" height="64" rx="10" fill="#EFF4FA" stroke="#1E4E79" stroke-width="1.6"/>
+  <text x="99" y="228" text-anchor="middle" font-size="15" font-weight="700" fill="#1E4E79">客户端</text>
+  <text x="99" y="246" text-anchor="middle" font-size="11" fill="#64748B">浏览器 / 请求</text>
+
+  <!-- Sentinel -->
+  <rect x="250" y="70" width="210" height="64" rx="10" fill="#FFF7EE" stroke="#B45309" stroke-width="1.6"/>
+  <text x="355" y="98" text-anchor="middle" font-size="15" font-weight="700" fill="#B45309">Sentinel</text>
+  <text x="355" y="116" text-anchor="middle" font-size="11" fill="#64748B">限流 / 防护</text>
+
+  <!-- Spring Boot -->
+  <rect x="250" y="185" width="210" height="70" rx="10" fill="#EFF4FA" stroke="#1E4E79" stroke-width="1.8"/>
+  <text x="355" y="214" text-anchor="middle" font-size="15" font-weight="700" fill="#1E4E79">Spring Boot 2.3.6</text>
+  <text x="355" y="233" text-anchor="middle" font-size="11" fill="#64748B">控制层 / 服务层</text>
+
+  <!-- Snowflake -->
+  <rect x="250" y="320" width="210" height="64" rx="10" fill="#F0F7F6" stroke="#0E7490" stroke-width="1.6"/>
+  <text x="355" y="348" text-anchor="middle" font-size="15" font-weight="700" fill="#0E7490">Snowflake</text>
+  <text x="355" y="366" text-anchor="middle" font-size="11" fill="#64748B">全局唯一 ID</text>
+
+  <!-- Redis -->
+  <rect x="540" y="70" width="252" height="70" rx="10" fill="#FDF2F2" stroke="#9F1239" stroke-width="1.6"/>
+  <text x="666" y="98" text-anchor="middle" font-size="15" font-weight="700" fill="#9F1239">Redis (Jedis) + Lua</text>
+  <text x="666" y="117" text-anchor="middle" font-size="11" fill="#64748B">原子扣减 · 缓存 · 锁</text>
+
+  <!-- RocketMQ -->
+  <rect x="540" y="185" width="252" height="70" rx="10" fill="#EFF4FA" stroke="#1E4E79" stroke-width="1.6"/>
+  <text x="666" y="213" text-anchor="middle" font-size="15" font-weight="700" fill="#1E4E79">RocketMQ</text>
+  <text x="666" y="232" text-anchor="middle" font-size="11" fill="#64748B">异步下单 / 支付</text>
+
+  <!-- MySQL -->
+  <rect x="540" y="320" width="252" height="70" rx="10" fill="#F0F7F6" stroke="#0E7490" stroke-width="1.6"/>
+  <text x="666" y="348" text-anchor="middle" font-size="15" font-weight="700" fill="#0E7490">MySQL + MyBatis</text>
+  <text x="666" y="367" text-anchor="middle" font-size="11" fill="#64748B">持久化</text>
+
+  <!-- arrows -->
+  <line x1="174" y1="232" x2="246" y2="232" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="355" y1="134" x2="355" y2="181" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="460" y1="215" x2="536" y2="105" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="460" y1="220" x2="536" y2="220" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="355" y1="255" x2="355" y2="316" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="666" y1="255" x2="666" y2="316" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+</svg>

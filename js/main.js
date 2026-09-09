@@ -66,14 +66,16 @@ const I18N = {
   'capability-coverage':{ en: 'Capability coverage by direction', zh: '按能力方向的项目覆盖' },
   'skills':             { en: 'Skills', zh: '技能' },
   'experience':         { en: 'Experience', zh: '实习经历' },
-  'experience-sub':     { en: 'Hover for a preview · click for full details', zh: '悬停预览 · 点击查看详情' },
+  'experience-sub':     { en: 'Click for full details', zh: '点击查看详情' },
   'projects':           { en: 'Projects', zh: '项目' },
   'projects-sub':       { en: 'Filter by capability direction', zh: '按能力方向筛选' },
   'engineering':        { en: 'Engineering', zh: '工程' },
   'engineering-sub':    { en: 'Personal code projects with architecture diagrams', zh: '带架构图的个人代码项目' },
   'research':           { en: 'Research & Publications', zh: '科研与论文' },
   'awards':             { en: 'Awards & Honors', zh: '奖项荣誉' },
-  'campus':             { en: 'Campus & Leadership', zh: '校园经历' }
+  'campus':             { en: 'Campus & Leadership', zh: '校园经历' },
+  'data-highlights':    { en: 'Data highlights', zh: '数据亮点' },
+  'data-highlights-sub':{ en: 'A few key numbers from my projects, visualized.', zh: '把项目里的几个关键数字画成图表。' }
 };
 function applyStaticI18n() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -95,6 +97,16 @@ function renderHero() {
   document.getElementById('hero-github').href = H.github;
   const li = document.getElementById('hero-linkedin');
   if (H.linkedin) { li.href = H.linkedin; li.style.display = ''; } else { li.style.display = 'none'; }
+
+  // 封面左右悬浮数据卡片（装饰，真实数据）
+  const badges = [
+    { v: '146,427', l: { en: 'records cleaned', zh: '清洗记录' }, icon: '🗄️' },
+    { v: '3h→1h',   l: { en: 'weekly prep saved', zh: '周报表省时' }, icon: '⚡' },
+    { v: '2.5×',    l: { en: 'payment gap found', zh: '支付差距' }, icon: '📈' },
+    { v: 'RAG',     l: { en: 'AI agent built', zh: 'AI 智能体' }, icon: '🤖' }
+  ];
+  document.getElementById('hero-decor').innerHTML = badges.map((b, i) => `
+    <div class="float-badge fb-${i + 1}"><span class="fb-ico">${b.icon}</span><span class="fb-v">${b.v}</span><span class="fb-l">${t(b.l)}</span></div>`).join('');
 }
 
 function renderStats() {
@@ -173,7 +185,7 @@ function renderProjects() {
     const realIdx = PORTFOLIO.projects.indexOf(p);
     const mainCat = p.categories[0];
     return `
-    <article class="proj-card reveal" style="--accent:${catColor(mainCat)}" data-modal="proj-${realIdx}">
+    <article class="proj-card" style="--accent:${catColor(mainCat)}" data-modal="proj-${realIdx}">
       <div class="proj-img">${p.image ? `<img src="assets/img/projects/${p.image}" alt="${t(p.title)}" loading="lazy">` : projectPlaceholder(p)}</div>
       <div class="proj-body">
         <div class="proj-tags">${p.categories.map(c => `<span class="tag" style="color:${catColor(c)};border-color:${catColor(c)}">${catName(c)}</span>`).join('')}</div>
@@ -181,7 +193,7 @@ function renderProjects() {
         <div class="proj-role">${t(p.role)}</div>
         <p class="proj-summary">${t(p.summary)}</p>
         <div class="proj-metrics">
-          ${p.metrics.map(m => `<div class="metric"><span class="m-value">${m.value}</span><span class="m-label">${t(m.label)}</span></div>`).join('')}
+          ${p.metrics.map(m => `<div class="metric"><span class="m-value">${t(m.value)}</span><span class="m-label">${t(m.label)}</span></div>`).join('')}
         </div>
         <div class="proj-tech">${p.tech.map(x => `<span class="chip">${x}</span>`).join('')}</div>
       </div>
@@ -211,7 +223,7 @@ function renderEngineering() {
       <p class="eng-summary">${t(e.summary)}</p>
       <ul class="eng-points">${e.highlights.map(h => `<li>${t(h)}</li>`).join('')}</ul>
       <div class="eng-diagram" data-modal="diag-${i}">
-        <img src="${e.diagram}" alt="${t(e.title)} architecture" loading="lazy">
+        <img src="${t(e.diagram)}" alt="${t(e.title)} architecture" loading="lazy">
       </div>
     </article>`).join('');
 }
@@ -229,14 +241,9 @@ function renderResearch() {
           ${p.type === 'book' ? '<span class="badge-book">' + (window.LANG === 'zh' ? '专著' : 'Book') + '</span>' : ''}
         </div>
       </div>
-      <div class="pub-metric"><span class="m-value">${p.metric.value}</span><span class="m-label">${t(p.metric.label)}</span></div>
+      <div class="pub-metric"><span class="m-value">${t(p.metric.value)}</span><span class="m-label">${t(p.metric.label)}</span></div>
     </div>`).join('');
 
-  const IR = PORTFOLIO.inReview;
-  document.getElementById('inreview-heading').textContent = t(IR.heading);
-  document.getElementById('inreview-note').textContent = t(IR.note);
-  document.getElementById('inreview-journals').innerHTML = IR.journals.map(j => `
-    <div class="jr"><span class="jr-name">${j.journal}</span><span class="jr-count">×${j.count}</span><span class="jr-status">${t(j.status)}</span></div>`).join('');
 }
 
 /* ============================== ⑦ Awards ============================== */
@@ -290,8 +297,8 @@ function openModal(key) {
       <p class="m-summary">${t(e.summary)}</p>
       <ul class="m-bullets">${e.bullets.map(b => `<li>${t(b)}</li>`).join('')}</ul>
       <div class="m-row"><span class="m-label">${window.LANG === 'zh' ? '技术栈' : 'Tech'}:</span> ${e.tech.map(x => `<span class="chip">${x}</span>`).join('')}</div>
-      <div class="m-metrics">${e.metrics.map(m => `<div class="metric"><span class="m-value">${m.value}</span><span class="m-label">${t(m.label)}</span></div>`).join('')}</div>
-      ${e.diagram ? `<div class="m-img diag-zoom"><img src="${e.diagram}" alt="${t(e.company)}"></div>` : ''}`;
+      <div class="m-metrics">${e.metrics.map(m => `<div class="metric"><span class="m-value">${t(m.value)}</span><span class="m-label">${t(m.label)}</span></div>`).join('')}</div>
+      ${e.diagram ? `<div class="m-img diag-zoom"><img src="${t(e.diagram)}" alt="${t(e.company)}"></div>` : ''}`;
   } else if (type === 'proj') {
     const p = PORTFOLIO.projects[idx];
     html = `
@@ -302,14 +309,14 @@ function openModal(key) {
       <p class="m-summary">${t(p.summary)}</p>
       <ul class="m-bullets">${p.highlights.map(h => `<li>${t(h)}</li>`).join('')}</ul>
       <div class="m-row"><span class="m-label">${window.LANG === 'zh' ? '技术栈' : 'Tech'}:</span> ${p.tech.map(x => `<span class="chip">${x}</span>`).join('')}</div>
-      <div class="m-metrics">${p.metrics.map(m => `<div class="metric"><span class="m-value">${m.value}</span><span class="m-label">${t(m.label)}</span></div>`).join('')}</div>
+      <div class="m-metrics">${p.metrics.map(m => `<div class="metric"><span class="m-value">${t(m.value)}</span><span class="m-label">${t(m.label)}</span></div>`).join('')}</div>
       ${p.image ? `<div class="m-img"><img src="assets/img/projects/${p.image}" alt="${t(p.title)}"></div>` : ''}`;
   } else if (type === 'diag') {
     const e = PORTFOLIO.engineering[idx];
     html = `
       <div class="m-accent" style="background:${e.accent}"></div>
       <h3>${t(e.title)} — ${window.LANG === 'zh' ? '架构图' : 'Architecture'}</h3>
-      <div class="m-img diag-zoom"><img src="${e.diagram}" alt="${t(e.title)}"></div>
+      <div class="m-img diag-zoom"><img src="${t(e.diagram)}" alt="${t(e.title)}"></div>
       <p class="m-summary" style="margin-top:12px">${t(e.summary)}</p>`;
   }
 
@@ -323,12 +330,19 @@ function closeModal() {
 }
 
 /* ============================== 动效 ============================== */
+let revealIO = null;
+function observeReveals() {
+  if (!revealIO) {
+    revealIO = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); revealIO.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+  }
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => revealIO.observe(el));
+}
+
 function bindScrollAnimations() {
   // reveal-on-scroll
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  observeReveals();
 
   // count-up numbers
   const cio = new IntersectionObserver(entries => {
