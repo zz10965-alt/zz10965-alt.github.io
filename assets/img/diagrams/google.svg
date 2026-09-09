@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 440" font-family="Inter,Arial,sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+  <rect width="860" height="440" rx="14" fill="#ffffff"/>
+  <text x="430" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#1E4E79">Google Ad Analytics — Data Pipeline</text>
+
+  <!-- SQL -->
+  <rect x="28" y="190" width="180" height="72" rx="10" fill="#EFF4FA" stroke="#1E4E79" stroke-width="1.8"/>
+  <text x="118" y="219" text-anchor="middle" font-size="15" font-weight="700" fill="#1E4E79">SQL</text>
+  <text x="118" y="238" text-anchor="middle" font-size="11" fill="#64748B">100K+ ad rows · 50+ campaigns</text>
+
+  <!-- Pandas -->
+  <rect x="250" y="190" width="180" height="72" rx="10" fill="#FFF7EE" stroke="#B45309" stroke-width="1.8"/>
+  <text x="340" y="219" text-anchor="middle" font-size="15" font-weight="700" fill="#B45309">Pandas</text>
+  <text x="340" y="238" text-anchor="middle" font-size="11" fill="#64748B">CTR · CVR · CPA · WoW/MoM</text>
+
+  <!-- Attribution -->
+  <rect x="472" y="190" width="180" height="72" rx="10" fill="#F0F7F6" stroke="#0E7490" stroke-width="1.8"/>
+  <text x="562" y="219" text-anchor="middle" font-size="15" font-weight="700" fill="#0E7490">Attribution</text>
+  <text x="562" y="238" text-anchor="middle" font-size="11" fill="#64748B">benchmark · drill-down</text>
+
+  <!-- Tableau -->
+  <rect x="694" y="190" width="140" height="72" rx="10" fill="#FDF2F2" stroke="#9F1239" stroke-width="1.8"/>
+  <text x="764" y="219" text-anchor="middle" font-size="15" font-weight="700" fill="#9F1239">Tableau</text>
+  <text x="764" y="238" text-anchor="middle" font-size="11" fill="#64748B">8 KPI × 6 dims</text>
+
+  <!-- arrows -->
+  <line x1="208" y1="226" x2="246" y2="226" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="430" y1="226" x2="468" y2="226" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="652" y1="226" x2="690" y2="226" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- result note -->
+  <rect x="280" y="310" width="300" height="54" rx="10" fill="#F6F8FA" stroke="#CBD5E1" stroke-width="1.4"/>
+  <text x="430" y="333" text-anchor="middle" font-size="13" font-weight="700" fill="#1E4E79">周数据准备 3h → 1h</text>
+  <text x="430" y="352" text-anchor="middle" font-size="11" fill="#64748B">自动报表管道 · 后续实习生沿用</text>
+</svg>

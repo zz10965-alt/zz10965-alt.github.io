@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 470" font-family="Inter,Arial,sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+  <rect width="860" height="470" rx="14" fill="#ffffff"/>
+  <text x="430" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#1E4E79">Seckill System — High-Concurrency Architecture</text>
+
+  <!-- Client -->
+  <rect x="28" y="200" width="150" height="62" rx="10" fill="#EFF4FA" stroke="#1E4E79" stroke-width="1.6"/>
+  <text x="103" y="227" text-anchor="middle" font-size="15" font-weight="700" fill="#1E4E79">Client</text>
+  <text x="103" y="246" text-anchor="middle" font-size="11" fill="#64748B">browser / request</text>
+
+  <!-- Sentinel -->
+  <rect x="250" y="70" width="210" height="62" rx="10" fill="#FFF7EE" stroke="#B45309" stroke-width="1.6"/>
+  <text x="355" y="97" text-anchor="middle" font-size="15" font-weight="700" fill="#B45309">Sentinel</text>
+  <text x="355" y="116" text-anchor="middle" font-size="11" fill="#64748B">rate limiting / protection</text>
+
+  <!-- Spring Boot -->
+  <rect x="250" y="200" width="210" height="72" rx="10" fill="#EFF4FA" stroke="#1E4E79" stroke-width="1.8"/>
+  <text x="355" y="229" text-anchor="middle" font-size="15" font-weight="700" fill="#1E4E79">Spring Boot 2.3.6</text>
+  <text x="355" y="248" text-anchor="middle" font-size="11" fill="#64748B">Controller / Service</text>
+
+  <!-- Snowflake -->
+  <rect x="250" y="330" width="210" height="62" rx="10" fill="#F0F7F6" stroke="#0E7490" stroke-width="1.6"/>
+  <text x="355" y="357" text-anchor="middle" font-size="15" font-weight="700" fill="#0E7490">Snowflake</text>
+  <text x="355" y="376" text-anchor="middle" font-size="11" fill="#64748B">global unique ID</text>
+
+  <!-- Redis -->
+  <rect x="540" y="70" width="252" height="72" rx="10" fill="#FDF2F2" stroke="#9F1239" stroke-width="1.6"/>
+  <text x="666" y="97" text-anchor="middle" font-size="15" font-weight="700" fill="#9F1239">Redis (Jedis) + Lua</text>
+  <text x="666" y="116" text-anchor="middle" font-size="11" fill="#64748B">atomic deduction · cache · lock</text>
+
+  <!-- RocketMQ -->
+  <rect x="540" y="200" width="252" height="72" rx="10" fill="#EFF4FA" stroke="#1E4E79" stroke-width="1.6"/>
+  <text x="666" y="227" text-anchor="middle" font-size="15" font-weight="700" fill="#1E4E79">RocketMQ</text>
+  <text x="666" y="246" text-anchor="middle" font-size="11" fill="#64748B">async order / payment</text>
+
+  <!-- MySQL -->
+  <rect x="540" y="330" width="252" height="72" rx="10" fill="#F0F7F6" stroke="#0E7490" stroke-width="1.6"/>
+  <text x="666" y="357" text-anchor="middle" font-size="15" font-weight="700" fill="#0E7490">MySQL + MyBatis</text>
+  <text x="666" y="376" text-anchor="middle" font-size="11" fill="#64748B">persistence</text>
+
+  <!-- arrows -->
+  <line x1="178" y1="231" x2="246" y2="231" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="355" y1="132" x2="355" y2="196" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="460" y1="210" x2="536" y2="106" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="460" y1="236" x2="536" y2="236" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="355" y1="272" x2="355" y2="326" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="666" y1="272" x2="666" y2="326" stroke="#64748B" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- arrow labels -->
+  <text x="500" y="150" text-anchor="middle" font-size="11" fill="#9F1239" font-weight="600">Lua 原子扣减</text>
+  <text x="682" y="302" text-anchor="middle" font-size="11" fill="#64748B">削峰 / 异步落库</text>
+  <text x="290" y="163" text-anchor="middle" font-size="11" fill="#B45309">限流保护</text>
+</svg>
