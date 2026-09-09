@@ -403,30 +403,15 @@ img { max-width: 100%; display: block; }
   .tb-tools { display: none; }
 }
 
-/* ============================== Engineering ============================== */
-.eng-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
-.eng-card {
-  background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--accent, var(--primary));
-  border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm);
-  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-}
-.eng-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; grid-column: 1 / -1; }
-.eng-top h4 { font-size: 1.35rem; font-weight: 800; }
-.eng-oneliner { color: var(--text-2); font-size: 0.9rem; margin-top: 2px; }
+/* ============================== Engineering（卡片 + 点击弹窗，封面=架构图） ============================== */
+.eng-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.eng-mini .proj-img { height: 180px; background: var(--bg-alt); }
+.eng-mini .proj-img img { object-fit: contain; padding: 14px; }
 .repo-btn {
-  padding: 9px 16px; border-radius: 9px; background: var(--primary-soft); color: var(--primary);
+  display: inline-block; padding: 9px 16px; border-radius: 9px; background: var(--primary-soft); color: var(--primary);
   font-weight: 600; font-size: 0.85rem; white-space: nowrap; transition: all .18s;
 }
 .repo-btn:hover { background: var(--primary); color: #fff; }
-.eng-stack { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
-.eng-summary { grid-column: 1 / -1; color: var(--text); }
-.eng-points { grid-column: 1 / -1; padding-left: 20px; color: var(--text-2); font-size: 0.92rem; display: grid; gap: 6px; }
-.eng-diagram {
-  grid-column: 1 / -1; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 10px;
-  padding: 16px; cursor: zoom-in; transition: box-shadow .2s;
-}
-.eng-diagram:hover { box-shadow: var(--shadow); }
-.eng-diagram img { width: 100%; height: auto; }
 
 /* ============================== Research ============================== */
 .pub-list { display: grid; gap: 16px; }
@@ -510,7 +495,7 @@ img { max-width: 100%; display: block; }
   .about-grid, .edu-list, .skill-groups, .awards-wrap, .campus-list { grid-template-columns: 1fr; }
   .project-grid { grid-template-columns: repeat(2, 1fr); }
   .viz-grid { grid-template-columns: 1fr; }
-  .eng-card { grid-template-columns: 1fr; }
+  .eng-grid { grid-template-columns: repeat(2, 1fr); }
   .pub-item { grid-template-columns: 1fr; gap: 8px; }
   .pub-metric { text-align: left; }
   .stats-grid { grid-template-columns: repeat(3, 1fr); }
@@ -524,6 +509,7 @@ img { max-width: 100%; display: block; }
   .nav-burger { display: block; margin-left: auto; }
   .lang-switch { margin-left: 0; }
   .project-grid { grid-template-columns: 1fr; }
+  .eng-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .hero { padding-top: 90px; }
   .section { padding: 64px 20px; }

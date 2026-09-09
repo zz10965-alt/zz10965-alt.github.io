@@ -74,8 +74,6 @@ const I18N = {
   'research':           { en: 'Research & Publications', zh: '科研与论文' },
   'awards':             { en: 'Awards & Honors', zh: '奖项荣誉' },
   'campus':             { en: 'Campus & Leadership', zh: '校园经历' },
-  'data-highlights':    { en: 'Data highlights', zh: '数据亮点' },
-  'data-highlights-sub':{ en: 'A few key numbers from my projects, visualized.', zh: '把项目里的几个关键数字画成图表。' }
 };
 function applyStaticI18n() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -254,19 +252,13 @@ function projectPlaceholder(p) {
 /* ============================== ⑤ Engineering ============================== */
 function renderEngineering() {
   document.getElementById('eng-grid').innerHTML = PORTFOLIO.engineering.map((e, i) => `
-    <article class="eng-card reveal" style="--accent:${e.accent}">
-      <div class="eng-top">
-        <div>
-          <h4>${t(e.title)}</h4>
-          <div class="eng-oneliner">${t(e.oneLiner)}</div>
-        </div>
-        <a class="repo-btn" href="${e.repo}" target="_blank" rel="noopener">${window.LANG === 'zh' ? '代码仓库' : 'Repo'} ↗</a>
-      </div>
-      <div class="eng-stack">${e.stack.map(s => `<span class="chip">${s}</span>`).join('')}</div>
-      <p class="eng-summary">${t(e.summary)}</p>
-      <ul class="eng-points">${e.highlights.map(h => `<li>${t(h)}</li>`).join('')}</ul>
-      <div class="eng-diagram" data-modal="diag-${i}">
-        <img src="${t(e.diagram)}" alt="${t(e.title)} architecture" loading="lazy">
+    <article class="proj-card eng-mini" style="--accent:${e.accent}" data-modal="eng-${i}">
+      <div class="proj-img"><img src="${t(e.diagram)}" alt="${t(e.title)} architecture" loading="lazy"></div>
+      <div class="proj-body">
+        <h4>${t(e.title)}</h4>
+        <div class="proj-role">${t(e.oneLiner)}</div>
+        <p class="proj-summary">${t(e.summary)}</p>
+        <div class="proj-tech">${e.stack.map(s => `<span class="chip">${s}</span>`).join('')}</div>
       </div>
     </article>`).join('');
 }
@@ -355,13 +347,17 @@ function openModal(key) {
       <div class="m-row"><span class="m-label">${window.LANG === 'zh' ? '技术栈' : 'Tech'}:</span> ${p.tech.map(x => `<span class="chip">${x}</span>`).join('')}</div>
       <div class="m-metrics">${p.metrics.map(m => `<div class="metric"><span class="m-value">${t(m.value)}</span><span class="m-label">${t(m.label)}</span></div>`).join('')}</div>
       ${p.image ? `<div class="m-img"><img src="assets/img/projects/${p.image}" alt="${t(p.title)}"></div>` : ''}`;
-  } else if (type === 'diag') {
+  } else if (type === 'eng') {
     const e = PORTFOLIO.engineering[idx];
     html = `
       <div class="m-accent" style="background:${e.accent}"></div>
-      <h3>${t(e.title)} — ${window.LANG === 'zh' ? '架构图' : 'Architecture'}</h3>
-      <div class="m-img diag-zoom"><img src="${t(e.diagram)}" alt="${t(e.title)}"></div>
-      <p class="m-summary" style="margin-top:12px">${t(e.summary)}</p>`;
+      <h3>${t(e.title)}</h3>
+      <div class="m-role">${t(e.oneLiner)}</div>
+      <p class="m-summary">${t(e.summary)}</p>
+      <ul class="m-bullets">${e.highlights.map(h => `<li>${t(h)}</li>`).join('')}</ul>
+      <div class="m-row"><span class="m-label">${window.LANG === 'zh' ? '技术栈' : 'Tech'}:</span> ${e.stack.map(x => `<span class="chip">${x}</span>`).join('')}</div>
+      <div class="m-row" style="margin-top:14px"><a class="repo-btn" href="${e.repo}" target="_blank" rel="noopener">${window.LANG === 'zh' ? '查看代码仓库' : 'View Repo'} ↗</a></div>
+      <div class="m-img diag-zoom" style="margin-top:16px"><img src="${t(e.diagram)}" alt="${t(e.title)} architecture"></div>`;
   }
 
   body.innerHTML = html;
