@@ -88,7 +88,6 @@ function renderHero() {
   document.getElementById('hero-name').textContent = t(H.name);
   document.getElementById('hero-role').textContent = t(H.role);
   document.getElementById('hero-tagline').textContent = t(H.tagline);
-  document.getElementById('hero-location').textContent = t(H.location);
   document.getElementById('hero-intro').textContent = t(H.intro);
   document.getElementById('hero-location-text').textContent = t(H.location);
 
